@@ -1,15 +1,18 @@
 # Current Goals
 
 ## Objetivo Atual
-Foco estrito na ideação e no amadurecimento conceitual de O Tribunal das Almas, respeitando o cronograma da disciplina CSI507 e as orientações em sala do professor Tiago França.
+
+Consolidar as entregas conceituais e narrativas de *O Tribunal das Almas*, preparando o terreno para a concepção de arte, identidade visual e protótipos preliminares de interface (Etapa 5) de acordo com o cronograma de CSI507 e orientações do professor Tiago França.
 
 ## Metas Imediatas
-- Concluir a entrega da Etapa 3 (High Concept Document em PDF no Moodle até 04/10);
-- Estruturar o repositório no GitHub mantendo a organização de pastas e documentação espelhada do Project Nova;
-- Aprofundar as ideias de design, mecânicas e dilemas morais com calma, sem pressa de implementar código;
-- Acompanhar as próximas aulas de Game Design e Concepção antes de abrir qualquer ferramenta de programação.
+
+- Realizar o envio no Moodle do relatório oficial em PDF da **Etapa 4 (História, Personagens e Mundo do Jogo)** até a data limite (11/10/2026 às 23:59);
+- Acompanhar as aulas teóricas e práticas sobre Identidade Visual, Paleta de Cores e Prototipação de Telas;
+- Iniciar os estudos visuais para a **Etapa 5 (Identidade Visual e Protótipos Preliminares)**: definição de paleta em pixel art, tipografia de formulários burocráticos e mockups refinados da bancada do Auditor 404;
+- Manter o repositório documental e o DevLog devidamente sincronizados a cada marco acadêmico.
 
 ## Não Trabalhar Agora
-- Não iniciar programação, scripts ou engine antecipadamente;
-- Não definir sprints técnicos fechados antes do professor passar os critérios das próximas etapas;
-- Não ter pressa para codificar. O foco é a concepção e consistência da ideia.
+
+- Não antecipar codificação pesada na engine antes da validação dos protótipos em papel e baixa fidelidade (Etapa 6);
+- Não expandir o escopo narrativo além dos 5 turnos planejados, preservando a viabilidade do desenvolvimento individual;
+- Manter foco estrito no design diegético da bancada sem dispersão em sistemas secundários desnecessários.

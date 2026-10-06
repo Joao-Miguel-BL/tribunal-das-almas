@@ -5,10 +5,11 @@
 - **Título provisório:** O Tribunal das Almas (Título de trabalho alternativo: *Setor de Triagem 7*)
 - **Gênero:** Simulador Burocrático / Investigação Moral / Document Thriller
 - **Perspectiva:** 2D Diegética (Visão em primeira pessoa de bancada de trabalho)
-- **Engine:** Unity 6 LTS
+- **Engine:** Unity 6 LTS (ou Godot 4.x)
 - **Plataforma alvo:** Windows / WebGL (foco em entrega rápida e execução direta)
 - **Estilo visual:** Pixel art estilizada de alto contraste, estética burocrática anos 1960
-- **Equipe:** João Miguel Barros de Lacerda — Desenvolvimento Individual (Game Design, Roteiro, Arte e Programação)
+- **Equipe:**
+  - João Miguel Barros de Lacerda — Desenvolvimento Individual (Game Design, Roteiro, Arte e Programação)
 
 ## Visão Criativa e High Concept
 
@@ -82,28 +83,33 @@ Para finalizar o expediente de uma alma, o jogador pega um dos carimbos metálic
 7. **Balanço Diário:** Ao fim do turno, o Supervisor Kael audita os vereditos, aplica advertências ou valida a cota, e o Auditor 404 descobre um novo fragmento de sua própria memória.
 
 ## Estrutura Narrativa e Finais
-O jogo se divide em 5 Turnos de Expediente:
+O jogo se divide em 5 Turnos de Expediente (cada turno equivale a um dia de trabalho e traz almas com complexidade moral crescente):
 - **Turno 1: O Procedimento Padrão.** Almas simples, casos fáceis para tutorial diegético.
-- **Turno 2: As Zonas Cinzentas.** Casos em que a lei fria condena um ato de amor puro.
+- **Turno 2: As Zonas Cinzentas.** Casos em que a lei fria condena um ato de amor puro (ex: um pai que furtou alimentos hospitalares para a filha moribunda).
 - **Turno 3: A Primeira Interferência.** O surgimento de bilhetes de suborno e a primeira auditoria presencial do Supervisor Kael.
 - **Turno 4: O Espelho Trincado.** O Auditor encontra um relatório de óbito de uma cidadezinha familiar e uma foto antiga onde ele próprio aparece ao fundo.
 - **Turno 5: O Julgamento Final do Auditor.** A última alma do expediente é a pessoa diretamente responsável pela morte do Auditor 404 na vida terrena. O jogador deve decidir se usa seu poder burocrático para vingança pessoal ou para julgamento estrito da verdade.
 
 ### Os Três Finais do Jogo
-1. **A Engrenagem Perfeita (Fim Burocrático):** Cumpre todas as metas com 100% de obediência, ignora propinas e não demonstra misericórdia. O Auditor 404 é promovido a novo Supervisor, tendo sua memória permanentemente apagada.
-2. **A Corrupção do Abismo (Fim Oportunista):** Aceita as propinas do submundo para comprar regalias e sabotar o Setor 7. É desmascarado ou absorvido pelas entidades clandestinas, tornando-se um contrabandista de almas.
-3. **A Revelação e o Salto no Vazio (Fim Humano / Canônico):** Desafia as regras nos momentos de injustiça, descobre sua verdadeira identidade e perdoa seu executor no Turno 5. Antes de ser condenado pelo Supervisor, embarca clandestinamente no trem das almas rumo ao desconhecido.
+1. **A Engrenagem Perfeita (Fim Burocrático):** O jogador cumpre todas as metas com 100% de obediência, ignora propinas e não demonstra misericórdia. O Auditor 404 é promovido a novo Supervisor, tendo sua memória permanentemente apagada.
+2. **A Corrupção do Abismo (Fim Oportunista):** O jogador aceita as propinas do submundo para comprar regalias e sabotar o Setor 7. É desmascarado ou absorvido pelas entidades clandestinas, tornando-se um contrabandista de almas.
+3. **A Revelação e o Salto no Vazio (Fim Humano / Canônico):** O jogador desafia as regras nos momentos de injustiça, descobre sua verdadeira identidade e perdoa seu executor no Turno 5. Antes de ser condenado pelo Supervisor, o Auditor 404 embarca clandestinamente no trem das almas rumo ao desconhecido.
 
 ## Direção de Arte e Identidade Visual
 - **Paleta de Cores:** Dominância de tons frios e desbotados — cinza ardósia, verde-oliva decadente, creme envelhecido e chumbo.
-- **Pontos de Contraste Satural:** Cores puras reservadas para elementos funcionais de decisão (carimbo vermelho sangue, cera dourada, fumaça mística da balança, tinta luminescente).
-- **Tratamento Visual:** Pixel art estilizada com sombras tramadas (*dithering*), simulando fotografias antigas e arquivos mimeografados.
+- **Pontos de Contraste Satural:** Apenas elementos de interação crucial possuem cores puras (o carimbo vermelho sangue, a cera do selo dourado, a fumaça roxa da balança e os olhos bioluminescentes das almas no escuro).
+- **Tratamento de Linhas e Texturas:** Pixel art estilizada com contornos firmes e sombras tramadas (*dithering*), simulando fotografias antigas e documentos mimeografados.
 
 ## Paisagem Sonora e Trilha
-- **Design de Som Diegético:** Folhear papéis ásperos, estalo metálico do carimbo contra madeira maciça, zumbido elétrico de 60Hz da lâmpada fluorescente, relógio mecânico de parede e o rangido metálico dos trens.
-- **Trilha Sonora:** Minimalista e introspectiva. Drones lentos de violoncelo, notas esparsas de piano fosco e sintetizadores analógicos melancólicos.
+- **Design de Som Diegético (O Som do Papel):**
+  - Folhear papéis ásperos e gramaturas diferentes.
+  - O estalo metálico pesado do carimbo batendo na mesa de madeira maciça.
+  - O zumbido elétrico grave e constante (60Hz) da lâmpada fluorescente.
+  - O clique rítmico do relógio de ponto mecânico marcando o final do expediente.
+  - O rangido pesado das ferragens do trem chegando na estação exterior.
+- **Trilha Sonora:** Minimalista e introspectiva. Drones lentos de violoncelo, notas esparsas de piano fosco e sintetizadores analógicos melancólicos que criam um clima reflexivo e solene.
 
 ## Inspirações e Referências Oficiais
 - **Jogos:** *Papers, Please* (Lucas Pope), *Death and Taxes* (Placeholder Gameworks), *Grim Fandango* (LucasArts).
 - **Literatura & Filosofia:** Franz Kafka (*O Processo* e *A Metamorfose*), Dante Alighieri (*A Divina Comédia*), Livro dos Mortos do Egito Antigo (O Mito da Pesagem do Coração de Osíris e Maat).
-- **Cinema & Estética:** *Brazil* (Terry Gilliam), filmes *noir* dos anos 1940/50 e arquitetura soviética brutalista.
+- **Cinema & Estética:** *Brazil* (Terry Gilliam), filmes noir dos anos 1940/50 e arquitetura soviética brutalista.
