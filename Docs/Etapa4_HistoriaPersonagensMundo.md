@@ -1,239 +1,181 @@
-# O TRIBUNAL DAS ALMAS
-
-## PROJETO DE CURSO: ETAPA 4 — HISTÓRIA, PERSONAGENS E MUNDO DO JOGO
-
-**Disciplina:** Introdução ao Design e Desenvolvimento de Jogos (CSI507) | **Instituição:** Universidade Federal de Ouro Preto (UFOP) — ICEA / DECSI  
-**Aluno:** João Miguel Barros de Lacerda | **Título de Trabalho:** O Tribunal das Almas (*Setor de Triagem 7*)  
-**Semestre Letivo:** 2026.2 | **Data:** Outubro de 2026
-
----
-
-# 1. VISÃO GERAL NARRATIVA E PREMISSA DRAMÁTICA
-
-*O Tribunal das Almas* articula a tensão entre a frieza dos sistemas administrativos pós-vida e a complexidade irreduzível da moralidade humana. Em uma repartição cósmica atemporal inspirada no brutalismo dos anos 1960, a mortalidade terrena não é julgada por divindades oniscientes, mas catalogada com a indiferença de um departamento de trânsito em formulários mimeografados e laudos periciais.
-
-O jogador encarna o **Auditor 404**, um funcionário burocrata desprovido de memórias sobre sua própria vida humana. Sentado diante de uma bancada diegética repleta de papéis ásperos, ele manipula certidões de passamento, pesa relíquias na Balança do Pesar, aplica reagentes químicos para expor rasuras e decide o destino eterno dos recém-falecidos — *Repouso Eterno*, *Reencarnação Imediata* ou *Punição Correcional*. A narrativa explora a transição dramática do auditor: de uma engrenagem burocrática obediente a um indivíduo que redescobre a empatia, resgata fragmentos do próprio passado e confronta a alma diretamente ligada à sua própria morte em vida.
+# UNIVERSIDADE FEDERAL DE OURO PRETO (UFOP)
+## INSTITUTO DE CIÊNCIAS EXATAS E APLICADAS (ICEA) | DECSI
+### CSI507 — DESIGN E DESENVOLVIMENTO DE JOGOS | SEMESTRE 2026.2
+**Aluno:** João Miguel Barros de Lacerda (Desenvolvimento Individual)  
+**Projeto de Curso: Etapa 4 — História, Personagens e Mundo do Jogo**  
+**Título do Jogo:** O Tribunal das Almas (*Setor de Triagem 7*)  
+**Docente Responsável:** Prof. Tiago França Melo de Lima | **Data de Submissão:** Outubro de 2026
 
 ---
 
-# 2. CONSTRUÇÃO DO MUNDO DIEGÉTICO (WORLDBUILDING)
+# 1. RECAPITULAÇÃO DO HIGH CONCEPT
 
-## 2.1 O Setor de Triagem 7
-O Setor de Triagem 7 é uma das milhares de repartições periféricas suspensas no plano intermediário entre a vida mortal e a eternidade. Sua arquitetura reflete o brutalismo soviético e a estética corporativa opressiva dos anos 1960:
-- **Espaço Físico:** Paredes de concreto cinzento com umidade e infiltrações salinas; piso de linóleo gasto; fileiras monumentais de gaveteiros metálicos que sobem além da visão; iluminação sustentada por tubos fluorescentes de 60Hz que zumbem e piscam de forma intermitente.
-- **O Guichê e o Abismo Exterior:** Separando o auditor da sala de espera há um painel de vidro aramado fosco com uma grade circular de comunicação. Do outro lado da janela lateral, avista-se um abismo permanente de névoa leitosa cortado por trilhos de ferro suspensos, por onde circulam composições ferroviárias desprovidas de maquinista que transportam os contingentes de almas carimbadas.
-- **Tecnologia Analógica:** O fluxo de trabalho é totalmente desprovido de telas digitais. Os dossiês chegam via tubos pneumáticos de bronze; o tempo é aferido por um relógio mecânico de ponto de parede; os vereditos são selados com carimbos metálicos e tinta nanquim.
+*O Tribunal das Almas* é um simulador investigativo e burocrático de tribunal moral em 2D diegético, ambientado em uma repartição administrativa do pós-vida inspirada no brutalismo dos anos 1960. O jogador assume o papel do **Auditor 404**, um funcionário amnésico encarregado de examinar dossiês de almas recém-falecidas e selar seu destino eterno — *Repouso*, *Reencarnação* ou *Expurgo* — sob a vigilância austera do Inspetor Kael, a pressão do relógio de ponto e o peso de suas próprias escolhas éticas.
 
-## 2.2 A Diretoria Geral de Destinações e os Três Destinos
-A ordem pós-morte é controlada pela *Diretoria Geral de Destinações*, uma entidade hierárquica atemporal que gerencia a mortalidade humana com tabelas, metas numéricas e manuais de conformidade. Não existem noções maniqueístas de Paraíso e Inferno; o fluxo é segmentado em três destinos regulamentares:
-1. **Repouso Eterno (Descanso — Carimbo Dourado/Verde):** Destinado àqueles cuja existência terrena encerrou sem débitos morais pendentes ou cujos atos de sacrifício genuíno superaram suas faltas. É a destinação mais almejada e objeto de rigorosa fiscalização.
-2. **Reencarnação Imediata (Ciclo — Carimbo Azul Escuro):** Canalização para almas neutras, vidas precocemente interrompidas ou existências atreladas a pendências mundanas superficiais, forçando um novo ciclo biológico de aprendizado.
-3. **Punição Correcional (Expurgo / Purgatório — Carimbo Vermelho Carmim):** Destinado a indivíduos cujos atos deliberados espalharam devastação, crueldade ou rompimento irreparável do tecido social. Suas almas são direcionadas para câmaras de retificação de alta densidade espiritual.
-
-## 2.3 O Submundo Clandestino e a Economia do Além
-Sob a aparência de ordem perfeita da Diretoria, pulsa um mercado negro articulado pelo *Abismo Clandestino*. Agenciadores e entidades sombras infiltram bilhetes por frestas da bancada, ofertando favores, minutos extras de expediente e moedas de memória em troca do desvio de almas influentes ou ricas que desejam escapar do Expurgo.
+A mecânica central baseia-se no verbo *"examinar documentos, pesar relíquias na Balança do Pesar e carimbar o destino eterno das almas"*. O jogo une a frieza analítica da dedução documental (confrontar certidões, cartas e laudos) a elementos místicos táteis na bancada (a Balança do Pesar que emite fumaça ou brilho e a Tinta Reveladora que queima mentiras). O título tem como referências mecânicas e temáticas *Papers, Please*, *Death and Taxes*, *O Processo* (Kafka) e a lenda egípcia da pesagem do coração de Osíris e Maat.
 
 ---
 
-# 3. FICHAS COMPLETAS DE PERSONAGENS NARRATIVOS (TEMPLATE OFICIAL UFOP)
+# 2. TEMA E TOM DA OBRA
+
+## 2.1 Tema Central e Subtemas
+- **Tema Central:** *A responsabilidade moral individual frente à desumanização de sistemas burocráticos.* O jogo investiga se a obediência técnica a regras frias exime o indivíduo de sua cumplicidade no sofrimento alheio.
+- **Subtemas:**
+  - *Identidade e Memória:* A perda do passado como instrumento de alienação institucional e o resgate da memória como ato de rebeldia ética;
+  - *Justiça vs. Legalismo:* O conflito entre a aplicação cega do regulamento e a justiça substantiva/compassiva;
+  - *O Peso da Omissão:* A dor das palavras não ditas e dos carimbos colocados por covardia.
+
+## 2.2 Tom da Narrativa
+O tom de *O Tribunal das Almas* é **sombrio, melancólico, burocrático e reflexivo (Noir Existencial)**. A ambientação rejeita o heroísmo convencional; o sentimento predominante é o peso solene de segurar a vida de outro ser humano em folhas de papel áspero.
+- **Referências de Tom:**
+  1. *O Processo (Franz Kafka):* A atmosfera de opressão impessoal, onde o indivíduo é esmagado por engrenagens que ele não compreende totalmente;
+  2. *Papers, Please (Lucas Pope):* A tensão constante entre a sobrevivência burocrática e a empatia moral que custa caro;
+  3. *Disco Elysium (ZA/UM):* A melancolia de um protagonista amnésico que reconstrói a tragédia de seu passado através de pistas do ambiente.
+
+---
+
+# 3. STORY SPINE COMPLETO (ESTRUTURA PIXAR)
+
+- **Era uma vez…** no Setor de Triagem 7, uma repartição brutalista atemporal suspensa entre o mundo dos vivos e a eternidade, o Auditor 404, um funcionário metódico que teve sua memória mortal apagada pela Diretoria Geral de Destinações para operar como um burocrata neutro.
+- **Todos os dias…** ele examinava certidões frias e cartas na bancada, pesava objetos na Balança do Pesar e carimbava o destino eterno de almas para o Repouso, Reencarnação ou Expurgo, batendo ponto e cumprindo as cotas estatísticas sob os olhos severos do Inspetor Kael.
+- **Até que um dia…** um dossiê procedente de sua antiga cidade natal trouxe fotografias de um arquivo municipal incendiado nos anos 1960, acendendo faíscas de sua memória esquecida e revelando que ele próprio fora um arquivista que morreu naquele mesmo incidente.
+- **Por causa disso…** o Auditor 404 começou a desconfiar dos laudos oficiais, utilizando a Tinta Reveladora e a Balança para desenterrar rasuras e conceder o descanso a almas condenadas injustamente pelo manual, acumulando advertências disciplinares perigosas.
+- **Por causa disso…** Valter Sombra, um contrabandista de almas que opera nos dutos sob o balcão, ofereceu propinas e minutos extras de expediente em troca do desvio de réus ricos, confrontando a integridade moral do auditor em um momento de extrema fragilidade.
+- **Até que finalmente…** Helena Vasconcellos — uma jovem jornalista investigativa que morreu na Terra após o próprio Auditor 404 ter sonegado covardemente os documentos que poderiam tê-la protegido em vida — sentou-se diante do guichê no último expediente, forçando o protagonista a escolher entre condená-la para encobrir seu passado ou redimir sua culpa concedendo-lhe o descanso e enfrentando a ira da Diretoria.
+- **E desde então…** o Auditor 404 quebrou definitivamente a engrenagem do Setor 7: ao absolver Helena e rejeitar a mentira institucional, ele destruiu o vidro aramado com o peso da Balança e saltou a bordo da composição ferroviária em movimento rumo à névoa livre, provando que a dignidade humana é maior que qualquer carimbo.
+
+---
+
+# 4. EXPANSÃO NARRATIVA (SINOPSE E CONFLITO CENTRAL)
+
+## 4.1 Sinopse Curta (Elevator Pitch)
+No Setor de Triagem 7, uma repartição brutalista suspensa no pós-vida, o Auditor 404 cataloga almas recém-falecidas com a indiferença de um burocrata sem memória. Conforme examina laudos, cartas e relíquias místicas sob a vigilância do Inspetor Kael, detalhes em prontuários começam a despertar fragmentos de sua própria vida e morte na Terra. O expediente culmina na chegada da alma que ele próprio traiu em vida, forçando o jogador a decidir se permanece uma engrenagem cega do sistema ou se arrisca a própria alma pela redenção.
+
+## 4.2 Sinopse Expandida
+O jogo acompanha a jornada de um expediente cósmico organizado em turnos diários no Setor de Triagem 7 da Diretoria Geral de Destinações:
+- **Início:** O Auditor 404 inicia sua rotina amnésica manipulando dossiês de pessoas recém-falecidas. Ele domina as regras básicas: ler certidões, posicionar relíquias na Balança do Pesar e aplicar os carimbos oficiais (*Repouso Eterno*, *Reencarnação Imediata* ou *Punição Correcional*). Os primeiros casos parecem objetivos, mas rapidamente surgem contradições entre a frieza do regulamento e a nobreza de atos mundanos desesperados (como um operário que furtou cobre para soldar o berço da filha).
+- **Meio:** A estabilidade da repartição se rompe com o aumento da vigilância do Inspetor Kael e a intromissão de Valter Sombra, que infiltra bilhetes de suborno pela fresta inferior da mesa para salvar criminosos influentes. O jogador recebe a Tinta Reveladora e passa a desmascarar mentiras oficiais. Paralelamente, dossiês de almas relacionadas à cidade natal do auditor trazem pistas de um grande escândalo de corrupção hospitalar e do incêndio do arquivo municipal onde o protagonista trabalhava como Gabriel Lacerda. A amnésia do auditor se desfaz, revelando que ele foi cúmplice covarde daquele esquema.
+- **Fim:** No clímax da campanha, Helena Vasconcellos, a jornalista que tentou denunciar o esquema e foi silenciada por falta das provas que Gabriel ocultou, surge no guichê. O dossiê oficial exige seu Expurgo sumário por agitação pública. Kael vigia pessoalmente a bancada. O veredito sobre Helena sela o destino do jogo: o jogador pode escolher a covardia e ser promovido a um supervisor amnésico, ceder à corrupção e virar contrabandista do submundo, ou conceder o Repouso a Helena, quebrar o vidro aramado e saltar nos trens das almas rumo à libertação.
+
+## 4.3 Conflito Central
+- **Conflito Externo:** O embate entre o Auditor 404 e a máquina estatal da Diretoria Geral (representada por Kael), além do assédio mercantil de Valter Sombra. O jogador precisa atingir metas numéricas sob a pressão do relógio de ponto e o risco de demissão/expurgo sumário com 3 advertências.
+- **Conflito Interno:** A luta psíquica entre o conforto da obediência alienada (*'apenas cumpro o meu dever funcional'*) e a angústia da culpa despertada. O auditor precisa escolher entre perdoar a si mesmo através de um ato de coragem moral ou se refugiar na covardia que já destruiu sua vida na Terra.
+
+---
+
+# 5. FICHAS COMPLETAS DOS PERSONAGENS (ENTIDADES NARRATIVAS)
 
 ## FICHA DE PERSONAGEM 1 — AUDITOR 404 (PROTAGONISTA)
-### IDENTIFICAÇÃO
-- **Nome:** Designação Cadastral: Auditor 404 (Nome mortal oculto: Gabriel Lacerda)
-- **Apelidos / Títulos:** O Escriturário do Guichê 7; Funcionário Padrão
-- **Idade Aproximada:** Idade física aparente de 32 anos (atemporal na repartição)
-- **Papel Narrativo:** Protagonista / Personagem Controlado
-
-### PANO DE FUNDO
-Em vida, foi arquivista e escrivão na repartição municipal de uma cidade industrial decadente nos anos 1960. Homem pacato e tímido, descobriu um esquema de corrupção e desvio de verbas hospitalares, mas calou-se por medo de perder o sustento da família. A negligência acobertada causou mortes evitáveis e culminou em sua própria eliminação física sob a farsa de um desabamento predial. Ao despertar no Setor 7, teve sua memória intencionalmente obliterada pelo processo de admissão compulsória da Diretoria Geral.
-
-### MOTIVAÇÃO CENTRAL
-Inicialmente, cumprir a cota estipulada de análises diárias para evitar advertências e manter sua vaga. Com o desenrolar dos turnos, sua meta se transforma na busca obsessiva por resgatar sua identidade pregressa e fazer justiça genuína em vez de apenas cumprir despachos.
-
-### CONFLITO INTERNO
-A colisão interna entre a segurança da indiferença burocrática ('eu apenas sigo ordens') e o remorso crescente despertado pelas histórias dos falecidos. Cada decisão de compaixão consome seu tempo e coloca em risco sua própria integridade perante o Supervisor.
-
-### VOZ E LINGUAJAR
-Voz interna lacônica, observadora e melancólica. Fala com moderação e precisão técnica ao interfone.
-- Fala 1: *'A tinta é fria, mas quando o carimbo bate, parece que ainda posso ouvir o eco do último suspiro.'*
-- Fala 2: *'Se este dossiê for apenas números e artigos, quem responderá pelo que não coube nas linhas?'*
-
-### ARCO
-- **Estado Inicial:** Autômato funcional, rigoroso cumpridor de tabelas e indiferente ao sofrimento alheio.
-- **Ponto de Virada:** Turno 4, ao manipular um processo contendo seu próprio endereço residencial e a certidão de seu óbito forjado.
-- **Estado Final:** Consciência desperta; recusa-se a ser mero carimbador e aceita as consequências de seu julgamento moral no confronto com seu passado.
-
-### RELAÇÃO COM O JOGADOR
-O jogador assume diretamente a perspectiva em 1ª pessoa do Auditor 404, vivenciando seus dilemas, lendo seus pensamentos e operando suas mãos na bancada de trabalho.
-
-### RELAÇÃO COM OUTROS PERSONAGENS
-- **Inspetor Kael:** Relação de temor reverencial, pressão e vigilância constante.
-- **Valter Sombra:** Tentação constante; desconfiança em relação às promessas de atalhos.
-- **Helena Vasconcellos:** Vítima de sua covardia mortal; o espelho de sua redenção ou ruína final.
-
-### NOTA SOBRE APARÊNCIA
-Mãos ossudas com os dedos manchados de tinta nanquim azul e carmim; camisa branca engomada com golas puídas e suspensórios desgastados; semblante quase desprovido de cor.
+- **Nome e Papel Narrativo:** Auditor 404 (Identidade terrena: Gabriel Lacerda) | **Protagonista** (controlado pelo jogador em 1ª pessoa).
+- **Pano de Fundo:** Ex-arquivista municipal em uma cidade industrial nos anos 1960. Ocultou documentos que comprovavam desvio de verbas hospitalares por subserviência aos chefes. Morreu em um incêndio suspeito no arquivo e foi contratado compulsoriamente pelo Setor 7 com a memória apagada.
+- **Motivação Central:** Inicialmente, bater as cotas diárias para não sofrer advertências e manter sua vaga funcional. Posteriormente, reconstruir sua identidade perdida e julgar com justiça verdadeira.
+- **Conflito Interno:** O remorso de sua covardia terrena confrontando o medo da aniquilação burocrática pela Diretoria. A compaixão consome tempo e recursos preciosos.
+- **Voz e Linguajar:** Monólogos internos contidos, metódicos e melancólicos. Ao interfone do guichê, comunica-se com extrema polidez formal e vocabulário técnico.
+- **Arco:** Parte de um autômato passivo e indiferente, atravessa a crise de identidade no meio da jornada e atinge a libertação moral ao assumir a culpa e desafiar o sistema.
+- **Relação com o Jogador:** O jogador assume diretamente a visão, as decisões e os movimentos do personagem na bancada diegética.
+- **Aspecto Visual Inicial (1 linha):** *Homem esguio, pele pálida, dedos permanentemente manchados de carimbo azul, camisa engomada desgastada e suspensórios pretos.*
 
 ---
 
-## FICHA DE PERSONAGEM 2 — INSPETOR KAEL (O SUPERVISOR)
-### IDENTIFICAÇÃO
-- **Nome:** Kael (Registro Diretoria: Supervisor de Área 07-K)
-- **Apelidos / Títulos:** O Olho da Diretoria; O Censor de Almas
-- **Idade Aproximada:** Incalculável (aspecto austero de cerca de 50 anos)
-- **Papel Narrativo:** Antagonista Sistêmico / Mentor Opressor
-
-### PANO DE FUNDO
-Kael foi um dos primeiros auditores do Setor 7. Há séculos compreendeu que a empatia era o maior veneno para o funcionamento da eternidade. Ao extirpar deliberadamente qualquer compaixão e abraçar a geometria cega dos regulamentos, ascendeu ao posto de inspetor. Supervisiona os novos funcionários com a firmeza de quem considera a humanidade uma imperfeição matemática a ser corrigida por carimbos.
-
-### MOTIVAÇÃO CENTRAL
-Manter as cotas estatísticas perfeitamente equilibradas e garantir que nenhum auditor desenvolva laços emocionais ou questione a autoridade da Diretoria Geral.
-
-### CONFLITO INTERNO
-No fundo de sua armadura burocrática, Kael teme o surgimento de um auditor que prove que a justiça ética individual é superior à máquina da Diretoria, o que invalidaria séculos de sua própria existência desumanizada.
-
-### VOZ E LINGUAJAR
-Tom grave, seco, pausado e estritamente formal. Não eleva o tom de voz; sua frieza é sua maior arma de intimidação.
-- Fala 1: *'O Setor 7 não mede sentimentos, 404. Nós medimos conformidade com o Manual de Triagem.'*
-- Fala 2: *'Uma lágrima sobre o carimbo borra o nanquim e invalida o lote. Limpe a mesa e prossiga.'*
-
-### ARCO
-- **Estado Inicial:** Superior hierárquico severo que instrui e cobra produtividade.
-- **Ponto de Virada:** Constata que o Auditor 404 gasta tempo excessivo na Balança do Pesar examinando casos fora do padrão.
-- **Estado Final:** Assume o papel de acusador direto no final do expediente, exigindo a assinatura final de expurgo ou lavrando a demissão compulsória do protagonista.
-
-### RELAÇÃO COM O JOGADOR
-Kael é a presença intimidadora que surge ao término de cada turno de trabalho, auditando os carimbos, conferindo as advertências e lembrando o jogador de que ele é monitorado.
-
-### RELAÇÃO COM OUTROS PERSONAGENS
-- **Auditor 404:** Peça sob inspeção estrita; vê potencial técnico nele, mas receia sua inclinação sentimental.
-- **Valter Sombra:** Inimigo formal da repartição, embora Kael tolere certas anomalias estatísticas contanto que a cota global seja atingida.
-
-### NOTA SOBRE APARÊNCIA
-Porte esguio e imponente; traja um sobretudo pesado cinza-ardósia e um chapéu fedora que mergulha seu rosto em sombra perpétua, deixando visíveis apenas a ponta acesa de uma cigarrilha de fumaça cinzenta e um relógio de bolso de prata.
+## FICHA DE PERSONAGEM 2 — INSPETOR KAEL (ANTAGONISTA SISTÊMICO)
+- **Nome e Papel Narrativo:** Kael (Inspetor de Conformidade 07-K) | **Antagonista Sistêmico / Mentor Opressor**.
+- **Pano de Fundo:** Um dos primeiros auditores do pós-vida. Há séculos extirpou sua própria capacidade de sentir para transformar-se no regulamento vivo da repartição. Acredita que o pós-vida só não entra em colapso devido à inflexibilidade das regras.
+- **Motivação Central:** Manter o equilíbrio estatístico dos três destinos e garantir que nenhum auditor desenvolva laços emocionais ou questione a Diretoria Geral.
+- **Conflito Interno:** Teme que um auditor prove que a justiça moral individual é superior ao regulamento, o que tornaria seus séculos de desumanização um desperdício inútil.
+- **Voz e Linguajar:** Tom grave, seco, pausado e estritamente formal. Não altera a voz; intimida pela frieza cirúrgica e citações constantes de artigos e decretos.
+- **Arco:** De tutor austero no início para inquisidor impiedoso no fim, quando percebe que o Auditor 404 está sabotando os laudos oficiais por empatia.
+- **Relação com o Jogador:** Kael fiscaliza o jogador ao término de cada dia de trabalho, audita os erros, emite advertências e personifica a ameaça constante de Game Over.
+- **Aspecto Visual Inicial (1 linha):** *Alto, postura militar austera, sobretudo pesado cinza-ardósia e chapéu fedora que mergulha seus olhos em sombra perpétua.*
 
 ---
 
-## FICHA DE PERSONAGEM 3 — VALTER SOMBRA (O CONTATO CLANDESTINO)
-### IDENTIFICAÇÃO
-- **Nome:** Valter Sombra (Identidade pregressa: Dr. Valter Brandão)
-- **Apelidos / Títulos:** O Corretor do Abismo; A Voz da Fresta
-- **Idade Aproximada:** 45 anos na época da morte
-- **Papel Narrativo:** Aliado Oportunista / Tentador Moral
-
-### PANO DE FUNDO
-Ex-advogado criminalista de prestígio e negociador clandestino no mundo dos vivos. Ao morrer em uma emboscada política, conseguiu subornar mensageiros da passagem e esquivar-se da fila de triagem. Instalou-se nos dutos de manutenção inferiores da repartição, montando uma rede de contrabando de almas que redireciona criminosos afortunados para refúgios do Abismo antes que o trem do Expurgo parta.
-
-### MOTIVAÇÃO CENTRAL
-Lucrar no pós-vida acumulando relíquias de alto valor espiritual e influência sobre almas poderosas, transformando o pós-vida em sua própria corte de favores.
-
-### CONFLITO INTERNO
-Um profundo desprezo pela santidade e pela justiça divina, misturado com o medo pânico de ser descoberto por Kael e jogado nas fornalhas de desintegração.
-
-### VOZ E LINGUAJAR
-Sussurrado, aveludado, cínico e persuasivo. Utiliza metáforas comerciais e elogios condescendentes.
-- Fala 1: *'Um carimbo errado na pasta certa e amanhã você terá meia hora a mais de fôlego antes que o inspetor bata na porta.'*
-- Fala 2: *'A virtude não paga o aluguel da sua consciência, meu amigo. Deixe o santo queimar e salve quem sabe pagar.'*
-
-### ARCO
-- **Estado Inicial:** Insinua-se por pequenos bilhetes dobrados sob a mesa ofertando pequenas vantagens.
-- **Ponto de Virada:** Propõe o desvio descarado da alma de um corruptor de alto escalão no Turno 3, testando o limite ético do auditor.
-- **Estado Final:** Torna-se o patrocinador da rota de fuga do auditor ou seu delator vingativo caso suas propostas sejam rejeitadas.
-
-### RELAÇÃO COM O JOGADOR
-Atua como mecanismo de risco e recompensa: fornece itens que facilitam o expediente em troca de concessões que comprometem a moralidade e acumulam risco com o Supervisor.
-
-### RELAÇÃO COM OUTROS PERSONAGENS
-- **Auditor 404:** O operador útil e maleável que ele tenta corromper passo a passo.
-- **Inspetor Kael:** O predador natural de quem se esconde nos vãos de ventilação.
-
-### NOTA SOBRE APARÊNCIA
-Nunca revela seu corpo por inteiro: apenas mãos delgadas vestindo luvas de couro sem dedos e uma silhueta que ondula como fumaça negra por baixo da abertura do balcão.
+## FICHA DE PERSONAGEM 3 — VALTER SOMBRA (ALIADO AMBÍGUO / TENTADOR)
+- **Nome e Papel Narrativo:** Dr. Valter Brandão (Valter Sombra) | **Aliado Oportunista / Tentador Moral**.
+- **Pano de Fundo:** Ex-advogado criminalista de elite e lobista terreno. Ao morrer, subornou transportadores para fugir da triagem e montou uma rede clandestina de tráfico de almas nos dutos sob a bancada do Setor 7.
+- **Motivação Central:** Comprar almas de figuras ricas e poderosas para criar um império de devedores no Abismo, enfraquecendo a hegemonia da Diretoria.
+- **Conflito Interno:** Desprezo absoluto pela bondade humana misturado ao pavor paralisante de ser descoberto por Kael e destruído nas fornalhas de aniquilação.
+- **Voz e Linguajar:** Sussurrado, sedutor, persuasivo e irônico. Usa metáforas de comércio e bajulação calculada nos bilhetes que envia sob a bancada.
+- **Arco:** Surge oferecendo pequenos atalhos inofensivos; escala suas exigências para o desvio de criminosos hediondos; e termina como patrocinador da fuga ou delator do auditor.
+- **Relação com o Jogador:** Mecanismo de risco e recompensa mecânica: fornece moedas, relíquias e minutos extras em troca de corrupção documental.
+- **Aspecto Visual Inicial (1 linha):** *Corpo oculto sob a fresta do balcão; visíveis apenas dedos delgados em luvas de couro sem dedos e mechas de fumaça escura.*
 
 ---
 
-## FICHA DE PERSONAGEM 4 — HELENA VASCONCELLOS (A ALMA DO TURNO 5)
-### IDENTIFICAÇÃO
-- **Nome:** Helena de Souza Vasconcellos
-- **Apelidos / Títulos:** A Jornalista Investigativa; A Testemunha Esquecida
-- **Idade Aproximada:** 29 anos ao falecer
-- **Papel Narrativo:** Catalisador Dramático / Vítima-Chave e Redenção
-
-### PANO DE FUNDO
-Jovem jornalista investigativa empenhada em denunciar um consórcio financeiro que desviava verbas de sanatórios e asilos infantis. Para fechar sua reportagem, precisava de certidões arquivadas no órgão municipal onde o Auditor 404 trabalhava em vida. Ao ter seu acesso negado pela covardia burocrática dele, Helena continuou a investigação de forma independente, sendo emboscada e morta em um armazém abandonado.
-
-### MOTIVAÇÃO CENTRAL
-Conhecer a verdade sobre o motivo de sua morte e obter o merecido descanso, sem abrir mão de denunciar a injustiça que a silenciou na Terra.
-
-### CONFLITO INTERNO
-A dor de ver seu idealismo destruído pela mesquinharia humana e o desafio de perdoar o arquivista que agora, no além, detém o carimbo que decidirá seu destino.
-
-### VOZ E LINGUAJAR
-Firme, pausada, com dor contida e lucidez desarmante.
-- Fala 1: *'Eu conheço essas mãos... elas carimbaram o sigilo nos papéis que poderiam ter salvado cinco vidas. Inclusive a sua.'*
-- Fala 2: *'Não me dê o descanso por pena. Olhe na balança: o que sobrou de mim ainda pesa a verdade.'*
-
-### ARCO
-- **Estado Inicial:** Apresenta-se no guichê do Turno 5 como um dossiê com relatórios truncados e rasurados.
-- **Ponto de Virada:** Ao ser interrogada pelo comunicador, desmascara a farsa do processo e revela a identidade mortal do Auditor 404.
-- **Estado Final:** Seu destino (Repouso ou Expurgo injusto) sela a alma do próprio jogador e determina o final da narrativa.
-
-### RELAÇÃO COM O JOGADOR
-É a ré definitiva; o confronto direto entre o jogador e as consequências irrevogáveis de suas ações pregressas.
-
-### NOTA SOBRE APARÊNCIA
-Silhueta translúcida em tons de sépia e azul-pálido; veste uma capa de chuva encharcada; traz como relíquia pessoal uma caneta-tinteiro amassada e páginas queimadas de seu diário investigativo.
+## FICHA DE PERSONAGEM 4 — HELENA VASCONCELLOS (CATALISADOR DRAMÁTICO)
+- **Nome e Papel Narrativo:** Helena de Souza Vasconcellos | **Catalisador Dramático / Vítima-Chave e Redenção**.
+- **Pano de Fundo:** Jovem repórter independente nos anos 1960. Investigava fraudes hospitalares e precisava de certidões retidas no arquivo de Gabriel. Diante da recusa dele, prosseguiu sem respaldo e foi emboscada e morta na mesma noite da morte do arquivista.
+- **Motivação Central:** Obter a verdade sobre os mandantes de sua morte e alcançar o merecido Repouso Eterno sem abrir mão de seus princípios.
+- **Conflito Interno:** O ressentimento profundo por ter sido traída pela pequenez humana contra a capacidade moral de perdoar seu executor terreno.
+- **Voz e Linguajar:** Firme, lúcida, melancólica e penetrante. Fala ao interfone sem ódio, mas com uma franqueza que desarma qualquer justificativa burocrática.
+- **Arco:** Apresenta-se com um dossiê adulterado que pede sua condenação; confronta o protagonista através do vidro; e sua destinação final define o clímax do jogo.
+- **Relação com o Jogador:** É a prova moral suprema do jogador; o espelho de sua responsabilidade pessoal e a ponte para sua redenção.
+- **Aspecto Visual Inicial (1 linha):** *Silhueta translúcida em capa de chuva encharcada, segurando um caderno de anotações queimado cujas cinzas levitam.*
 
 ---
 
-# 4. CASOS DE ESTUDO E DILEMAS NARRATIVOS (TURNOS 1 A 5)
+# 6. MUNDO E CONTEXTO (GAME WORLD DESIGN)
 
-1. **Turno 1 — Arthur Santos (O Operário Comum):**
-   - *Histórico:* Operário siderúrgico com vida simples. Furtou peças da fábrica para consertar o berço do filho adoentado.
-   - *Dilema:* A regra formal da Diretoria classifica furto como infração sujeita à punição; a Balança do Pesar aponta leveza do ato amoroso. Ensina a distinção entre a lei cega e a justiça moral.
-2. **Turno 2 — Dr. Roberto Meireles (O Médico Sanitarista):**
-   - *Histórico:* Falsificou relatórios de óbito de pacientes para distribuir lotes de penicilina contrabandeada em um hospital lotado. Salvou dezenas, mas desrespeitou a ordem sanitária do estado.
-   - *Dilema:* O laudo oficial exige Reencarnação Imediata ou Expurgo por prevaricação; a Tinta Reveladora expõe que seus superiores lucravam com o desabastecimento.
-3. **Turno 3 — Matilde Silveira (A Espiã Diplomática):**
-   - *Histórico:* Negociou segredos de estado durante o pós-guerra para custear o tratamento de refugiados, mas causou a queda de figuras públicas inocentes.
-   - *Dilema:* Valter Sombra desliza um bilhete com generoso suborno para carimbá-la como Repouso Eterno; o laudo aponta sangue indireto em suas mãos.
-4. **Turno 4 — Gabriel Ramos (O Fotógrafo da Cidade Natal):**
-   - *Histórico:* Fotógrafo forense da cidade onde o Auditor 404 viveu.
-   - *Dilema:* Entre as relíquias de seu dossiê há fotografias do desabamento do arquivo municipal em que o próprio Auditor 404 faleceu, quebrando a amnésia do protagonista.
-5. **Turno 5 — Helena Vasconcellos (O Clímax Narrativo):**
-   - *Histórico:* A jornalista investigativa diretamente assassinada após a recusa do Auditor em fornecer os documentos em vida.
-   - *Dilema:* O veredito definitivo. O jogador aplicará vingança, covardia burocrática ou aceitará a redenção e a verdade?
+## 6.1 Onde e Quando se Passa
+A narrativa se passa no **Setor de Triagem 7**, uma instalação brutalista pertencente à Diretoria Geral de Destinações. O cenário situa-se em um plano intermediário atemporal (entre a Terra e o Infinito), mas sua tecnologia, vestimentas e atmosfera estética estão congeladas nas repartições públicas dos **anos 1960**.
+
+## 6.2 Regras que Governam o Mundo
+- **Regras Físico-Diegéticas:** No Setor 7, tudo é analógico e material. Os papéis têm gramatura e peso; o correio pneumático opera por tubos a vácuo; o tempo é ditado por um relógio de pêndulo mecânico.
+- **Regras Mágicas/Metafísicas:** Objetos físicos retêm a assinatura kármica do falecido. Ao colocar uma relíquia na **Balança do Pesar**, ela reage fisicamente: crimes pesam e emitem fuligem escura; virtudes puras levitam com brilho fosco. A **Tinta Reveladora** queima a celulose superficial, expondo caligrafias ocultas e rasuras premeditadas.
+- **Regras Sociais/Hierárquicas:** A Diretoria opera com conformidade cega. Auditores são numerados e descartáveis. Três advertências resultam em desintegração sumária.
+
+## 6.3 Tensão Social e Existencial
+A tensão fundamental é a **impessoalidade fria da burocracia contra a singularidade da vida humana**. O cenário exala opressão: paredes de concreto descascadas, lâmpadas fluorescentes que zumbem e trilhos no abismo onde trens partem cheios para destinos misteriosos. Paira a suspeita constante de que a Diretoria Geral não busca justiça, mas apenas esvaziar a sala de espera mantendo o equilíbrio de suas tabelas.
+
+## 6.4 Como o Cenário Amplifica o Conflito Central
+O confinamento do auditor dentro do guichê reforça o dilema moral. O vidro aramado isola o protagonista das almas, incentivando a frieza técnica. No entanto, o tato dos papéis, o som da respiração das almas no interfone e o peso físico das relíquias na balança quebram essa barreira, forçando o jogador a sentir a humanidade que a repartição tenta apagar.
 
 ---
 
-# 5. ESTRUTURA DOS 5 TURNOS DE EXPEDIENTE E PROGRESSÃO DRAMÁTICA
+# 7. CONEXÃO ENTRE NARRATIVA E GAMEPLAY
 
-O jogo se organiza em uma progressão narrativa clássica de três atos distribuída ao longo dos 5 turnos de trabalho:
-- **Ato I (Turnos 1 e 2) — Acomodação e primeiras fraturas:** Apresentação da rotina burocrática, domínio dos instrumentos e primeiros choques entre o regulamento e o bom senso ético.
-- **Ato II (Turnos 3 e 4) — O Cerco e a Descoberta:** Intervenção das forças clandestinas, intensificação da vigilância do Supervisor Kael e recuperação traumática da memória pregressa do Auditor 404.
-- **Ato III (Turno 5) — O Juízo Final do Juiz:** A chegada de Helena, o confronto pessoal de culpa, o desmonte da farsa administrativa e a decisão que determina o destino da repartição.
+## 7.1 A Mecânica Central como Metáfora do Tema
+- **A Balança do Pesar:** É a metáfora visual e mecânica do tema do jogo: contrastar o peso rígido das regras do estado contra o peso invisível das intenções e do coração humano.
+- **A Tinta Reveladora:** Representa o ato moral de desmascarar a narrativa oficial imposta pela burocracia, queimando a mentira para revelar a verdade.
+- **Os Carimbos e a Alavanca:** Simbolizam a irreversibilidade do poder administrativo. O estrondo metálico do carimbo e a sucção a vácuo mostram como decisões rápidas selam destinos para sempre.
 
----
+## 7.2 O Arco Narrativo Refletido nas Mecânicas (Progressão estilo Papers, Please)
+O jogo se estrutura em uma campanha contínua de **15 a 20 turnos de expediente diários**, divididos em 3 Grandes Épocas:
+1. *Dias 1 a 5 (Rotina das Engrenagens):* Foco no domínio dos carimbos e certidões simples. O jogador sente o conforto mecânico de cumprir ordens e a primeira tentação da indiferença.
+2. *Dias 6 a 12 (A Infiltração da Dúvida):* Introdução da Tinta Reveladora e dos bilhetes de suborno de Valter Sombra. Casos com narrativas interligadas (julgar um réu no Dia 7 afeta o depoimento de sua família no Dia 10). O tempo do relógio fica mais escasso.
+3. *Dias 13 a 20 (O Espelho Trincado):* Dossiês truncados com fotos da tragédia do próprio auditor. No Turno final, Helena comparece ao guichê. O jogador não tem novas ferramentas: usa toda a sua bagagem moral acumulada para o veredito supremo.
 
-# 6. SISTEMA DE ESCOLHAS, MORALIDADE E OS TRÊS FINAIS
-
-As escolhas do jogador acumulam dois índices diegéticos ocultos: **Índice de Conformidade** (obediência ao manual e a Kael) e **Índice de Consciência** (compaixão, recusa a subornos e busca da verdade).
-
-1. **Final 1: A Engrenagem Perfeita (Desfecho Burocrático):**
-   - *Condição:* Alto índice de conformidade, cumprimento das cotas, indiferença às almas e condenação de Helena para encobrir o próprio passado.
-   - *Desfecho:* O Auditor 404 é promovido a novo Supervisor; sua memória é permanentemente resetada e ele passa a vigiar o próximo auditor sem nome.
-2. **Final 2: A Corrupção do Abismo (Desfecho Oportunista):**
-   - *Condição:* Aceitação reiterada de subornos de Valter Sombra e manipulação fraudulenta de carimbos.
-   - *Desfecho:* O Auditor 404 é desmascarado por Kael e obrigado a fugir para os subterrâneos, tornando-se um agenciador clandestino de almas condenadas.
-3. **Final 3: A Revelação e o Salto no Vazio (Desfecho Humanista / Canônico):**
-   - *Condição:* Alto índice de consciência, absolvição sincera de Helena e denúncia pública da burocracia desumana do Setor 7.
-   - *Desfecho:* Kael sela a demissão de 404, mas antes de ser expurgado, o auditor quebra o vidro aramado e salta na composição ferroviária das almas livres, rompendo o ciclo da repartição.
+## 7.3 Momentos Jogáveis vs. Narrados
+- **Diegese Total:** Não há cutscenes tradicionais. 100% da narrativa se desenrola na bancada de trabalho em primeira pessoa.
+- **Momentos Jogáveis:** Leitura de cartas, aplicação da tinta, pesagem de relíquias, interrogatório pelo interfone e carimbadas de despacho.
+- **Momentos Narrados:** As auditorias presenciais de Kael no fim do turno e as manchetes de jornais do além na abertura do dia seguinte relatando as consequências dos trens despachados.
 
 ---
 
-# 7. LUDONARRATIVA: INTEGRAÇÃO ENTRE ENREDO E MECÂNICAS
+# 8. DECISÕES EM ABERTO (PRÓXIMAS ETAPAS)
+1. **Etapa 5 (Identidade Visual):**
+   - Definir a paleta exata de pixel art em tons de cinza chumbo, verde-oliva e pontos de saturação seletiva (dourado, vermelho, azul);
+   - Diagramar o layout final da bancada (posição da Balança, frasco de reagente e tubos pneumáticos).
+2. **Etapa 6 (Prototipagem em Papel):**
+   - Testar o tempo de leitura de cada dossiê (meta de 60 a 90 segundos por alma) e calibrar a tolerância de erros com jogadores reais.
+3. **Etapas 7 e 8 (Engine e Vertical Slice):**
+   - Confirmar a engine definitiva (Unity 6 LTS com ScriptableObjects para os dossiês);
+   - Definir se a sonoplastia diegética dos papéis usará gravações reais de foley analógico.
 
-- **A Balança do Pesar:** Materializa a busca pela interioridade da alma, contrastando o peso físico do Código Burocrático com o peso etéreo da intenção humana.
-- **A Tinta Reveladora:** Converte o ato mecânico de rasura em um gesto de investigação arqueológica, queimando a camada oficial da mentira.
-- **O Vidro Aramado e o Interfone:** A distância física e sonora imposta pelo vidro aramado simboliza a barreira desumanizadora das instituições contra a dor real.
-- **Os Carimbos e a Alavanca Pneumática:** O impacto sonoro e o vácuo pneumático reforçam a irreversibilidade de julgar o destino de outro ser humano.
+---
+
+# 9. REFERÊNCIAS NARRATIVAS EXPLÍCITAS E JUSTIFICATIVAS
+1. ***Papers, Please* (Lucas Pope):** Referência principal para a narrativa sistêmica e burocrática, na qual a rotina de trabalho diária de um agente estatal é o veículo condutor de dilemas éticos progressivos e decisões de alto impacto moral.
+2. ***O Processo* (Franz Kafka):** Referência fundamental para a atmosfera do Setor de Triagem 7, onde a burocracia é opressiva, infinita e inexplicável, reduzindo o ser humano a formulários e números cadastrais.
+3. ***Mito da Pesagem do Coração de Osíris e Maat* (Livro dos Mortos Egípcio):** Inspiração mitológica e temática direta para a Balança do Pesar, na qual o coração humano é pesado contra a pena da verdade para determinar o destino eterno.
+4. ***Death and Taxes* (Placeholder Gameworks):** Referência para o papel contemporâneo de juiz do pós-vida e a abordagem reflexiva sobre as nuances do fim da existência biológica.
+
+---
+
+# 10. CHECKLIST DE CONFORMIDADE DA ETAPA 4
+- [x] **Story spine completo** (Estrutura Pixar com 7 blocos em 1-2 frases);
+- [x] **Sinopse curta (4-5 linhas) e expandida (início, meio e fim)**;
+- [x] **Tema e tom definidos** com referências explícitas;
+- [x] **4 personagens com ficha narrativa completa** (Auditor 404, Kael, Valter Sombra e Helena Vasconcellos, com 7 tópicos + 1 linha visual cada);
+- [x] **Mundo e contexto descritos** (Fronteiras, tempo, regras e tensão existencial);
+- [x] **Conexão narrativa ↔ gameplay explicitada** (metáforas, progressão de turnos e diegese de bancada);
+- [x] **Pelo menos 3 referências narrativas citadas e justificadas** (*Papers, Please*, *O Processo*, *Mito de Osíris* e *Death and Taxes*).
