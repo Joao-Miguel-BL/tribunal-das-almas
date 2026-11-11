@@ -57,3 +57,22 @@ Registro cronológico oficial do desenvolvimento de *O Tribunal das Almas*.
   - Mapeamento detalhado dos 5 casos de estudo de almas para a campanha (Turnos 1 a 5), arquitetura dramática em três atos, sistema de moralidade com três finais (Burocrático, Oportunista e Humanista) e integração ludonarrativa;
   - Criação do Google Doc *Projeto de Curso - Etapa 4 - História, Personagens e Mundo* e geração do relatório oficial diagramado em PDF de 7 páginas para submissão no Moodle;
   - Cadastro do prazo de entrega (11/10/2026 às 23:59) na Google Agenda.
+
+## 2026-10-19 — Conclusão da Etapa 5 (Identidade Visual, Mecânicas e Protótipos Preliminares)
+- **Status:** Concluído
+- **Entregas:**
+  - Definição técnica da Identidade Visual de *O Tribunal das Almas*: estilo em pixel art 640×360 (upscale inteiro 3× para 1920×1080), técnica de dithering (Bayer 2×2 e 4×4) inspirada em impressos dos anos 1960 e contornos seletivos de 1px;
+  - Especificação da Paleta de Cores Oficial (10 cores Hex/RGB sob a regra de proporção 70-20-10) e da hierarquia tipográfica diegética em 3 níveis com contraste WCAG AAA;
+  - Elaboração da Tabela-Resumo das 6 Mecânicas (M1 a M6) e das 6 Fichas Individuais completas seguindo a Seção 6 dos Templates Auxiliares de CSI507;
+  - Construção dos Protótipos Preliminares de Interface: wireframe funcional 16:9 das 5 zonas da bancada diegética (Zonas A a E e Sorting Layers na Unity 6 LTS), máquina de estados de fluxo de 5 telas e protótipos de reação da Tinta Reveladora e da Balança do Pesar;
+  - Criação do Google Doc oficial e geração do relatório diagramado em PDF de 13 páginas (*Projeto de Curso - Etapa 5.pdf*) para submissão no Moodle;
+  - Cadastro do prazo no Google Agenda (25/10/2026 às 23:59).
+
+## 2026-10-31 — Conclusão da Etapa 6 (Prototipação em Baixa Fidelidade / Papel e Playtest)
+- **Status:** Concluído
+- **Entregas:**
+  - Construção do protótipo físico em baixa fidelidade (papel A4 quadriculado, fichas de dossiê com tarjas de post-it preto removíveis, fichas de gota de Tinta Reveladora e tabuleiro da Balança do Pesar);
+  - Especificação formal completa das 6 mecânicas (M1 a M6), Diagrama do Loop Central (Micro 90–120s e Macro 8–12 min), Dinâmicas MDA/DPE, Curva de Dificuldade nos 5 turnos, Design da Fase da Demo (3 casos + tutorial implícito), Fluxograma Completo de Telas com Auto-Save (SaveData.json) e Condições de Vitória e Derrota;
+  - Realização de 2 sessões formais de playtest em papel com voluntários externos (Lucas M., 21 anos e Mariana C., 23 anos);
+  - Incorporação de 3 ajustes estruturais de design pós-playtest: DD-011 (UX do halo violeta da Tinta e liberação do Interfone), DD-012 (Onboarding sem pressão temporal no Caso 1) e DD-013 (Regra explícita da Balança e reação aos bilhetes de Valter);
+  - Criação do documento oficial e geração do relatório completo em PDF de 12 páginas (*Projeto de Curso - Etapa 6.pdf*) para submissão no Moodle (limite 01/11/2026).
