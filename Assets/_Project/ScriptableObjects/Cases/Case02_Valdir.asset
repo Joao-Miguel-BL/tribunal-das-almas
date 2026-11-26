@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a096df5f291b474a8306e65e5dc4228, type: 3}
+  m_Name: Case02_Valdir
+  m_EditorClassIdentifier: Assembly-CSharp::TribunalDasAlmas.Core.SoulCaseData
+  soulName: Valdir Nogueira
+  occupation: Maquinista
+  certificateSummary: "Laudo de acidente ferrovi\xE1rio no ramal sul. Ap\xF3s falha
+    no sistema principal de frenagem, o maquinista permaneceu na cabine acionando
+    manualmente o freio de emerg\xEAncia at\xE9 a colis\xE3o, impedindo o descarrilamento
+    sobre o viaduto."
+  hasRedactedText: 0
+  hiddenRedactedText: 
+  relicName: "Rel\xF3gio de Bolso Derretido"
+  karmicWeight: -1
+  expectedVerdict: 0
+  intercomQuestion1: "Por que o senhor n\xE3o abandonou a cabine antes do impacto?"
+  intercomAnswer1: "Tinha mais de duzentos passageiros nos vag\xF5es de tr\xE1s.
+    Se eu largasse a alavanca auxiliar, o trem n\xE3o parava antes da ponte."
+  intercomQuestion2: "Esse Rel\xF3gio de Bolso Derretido pertencia ao senhor?"
+  intercomAnswer2: "Era do meu pai, tamb\xE9m maquinista. Parou no minuto exato em
+    que o \xFAltimo vag\xE3o travou nos trilhos. Pelo menos todo mundo chegou inteiro."
+  isOnboardingNoTimer: 0

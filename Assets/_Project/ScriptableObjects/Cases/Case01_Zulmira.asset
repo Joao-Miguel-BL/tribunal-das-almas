@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a096df5f291b474a8306e65e5dc4228, type: 3}
+  m_Name: Case01_Zulmira
+  m_EditorClassIdentifier: Assembly-CSharp::TribunalDasAlmas.Core.SoulCaseData
+  soulName: Zulmira Tavares
+  occupation: Costureira
+  certificateSummary: "Falecimento natural aos 84 anos em domic\xEDlio. Dossi\xEA
+    civil regular, sem ocorr\xEAncias criminais, pend\xEAncias burocr\xE1ticas ou
+    itens retidos na triagem."
+  hasRedactedText: 0
+  hiddenRedactedText: 
+  relicName: 
+  karmicWeight: 0
+  expectedVerdict: 1
+  intercomQuestion1: A senhora deixou algum assunto pendente em vida?
+  intercomAnswer1: "S\xF3 a barra do vestido da minha neta por terminar, meu filho.
+    Mas vivi em paz e sinto que ainda tenho disposi\xE7\xE3o pra recome\xE7ar."
+  intercomQuestion2: Trouxe algum objeto pessoal ou arrependimento consigo?
+  intercomAnswer2: "Nada, mo\xE7o. Vim de m\xE3os vazias, do mesmo jeitinho que cheguei
+    l\xE1."
+  isOnboardingNoTimer: 1
