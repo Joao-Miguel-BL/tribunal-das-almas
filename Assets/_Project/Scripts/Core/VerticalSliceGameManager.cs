@@ -300,17 +300,12 @@ namespace TribunalDasAlmas.Core
                 Mathf.Clamp(certificateSpawnPos.y, deskBoundsMin.y, deskBoundsMax.y),
                 0f);
 
-            string redactedSection = caseData.hasRedactedText
-                ? "\n\n<color=#1C2026><b>[TRECHO TARJADO — REQUER INSPEÇÃO]</b></color>"
-                : string.Empty;
-
             string certificateBody =
                 $"<b>CERTIDÃO DE ÓBITO — CASO 0{caseIndex + 1}</b>\n" +
                 $"────────────────────────\n" +
                 $"<b>Alma:</b> {caseData.soulName}\n" +
                 $"<b>Ocupação:</b> {caseData.occupation}\n\n" +
-                $"<b>Resumo do Laudo:</b>\n{caseData.certificateSummary}" +
-                redactedSection;
+                $"<b>Resumo do Laudo:</b>\n{caseData.certificateSummary}";
 
             DraggableDocument certificateDoc = CreatePaperDocument(
                 $"Doc_Certidao_Caso0{caseIndex + 1}_{caseData.soulName}",
@@ -318,9 +313,15 @@ namespace TribunalDasAlmas.Core
                 certificateBody,
                 certTargetPos);
 
+            // Se o caso possuir trecho censurado (M3 / DD-011), anexa a tarja interativa RedactedArea
+            if (caseData.hasRedactedText)
+            {
+                AttachRedactedAreaToDocument(certificateDoc, caseData);
+            }
+
             spawned.Add((certificateDoc, certTargetPos));
 
-            // Documento Auxiliar: Guia de Triagem / Relíquia e Interfone
+            // Documento Auxiliar: Guia de Triagem
             Vector3 auxTargetPos = new Vector3(
                 Mathf.Clamp(auxiliarySlipSpawnPos.x, deskBoundsMin.x, deskBoundsMax.x),
                 Mathf.Clamp(auxiliarySlipSpawnPos.y, deskBoundsMin.y, deskBoundsMax.y),
@@ -344,7 +345,36 @@ namespace TribunalDasAlmas.Core
                 auxTargetPos);
 
             spawned.Add((auxDoc, auxTargetPos));
+
+            // Se o caso possuir relíquia física (M2), instancia o item arrastável com IsRelic = true
+            if (!string.IsNullOrWhiteSpace(caseData.relicName))
+            {
+                Vector3 relicTargetPos = new Vector3(
+                    Mathf.Clamp(auxiliarySlipSpawnPos.x, deskBoundsMin.x, deskBoundsMax.x),
+                    Mathf.Clamp(auxiliarySlipSpawnPos.y + 1.4f, deskBoundsMin.y, deskBoundsMax.y),
+                    0f);
+
+                DraggableDocument relicItem = CreatePaperDocument(
+                    $"Relic_Caso0{caseIndex + 1}_{caseData.relicName}",
+                    new Vector2(2.0f, 1.0f),
+                    $"<b>[RELÍQUIA]</b>\n{caseData.relicName}",
+                    relicTargetPos);
+                relicItem.IsRelic = true;
+
+                spawned.Add((relicItem, relicTargetPos));
+            }
+
             return spawned;
+        }
+
+        private void AttachRedactedAreaToDocument(DraggableDocument document, SoulCaseData caseData)
+        {
+            GameObject redactedObj = new GameObject("RedactedArea_Tarja");
+            redactedObj.transform.SetParent(document.transform, false);
+            redactedObj.transform.localPosition = new Vector3(0f, -certificateSize.y * 0.32f, -0.02f);
+
+            RedactedArea redactedArea = redactedObj.AddComponent<RedactedArea>();
+            redactedArea.Configure(caseData, new Vector2(certificateSize.x - 0.5f, 0.95f), customFontAsset);
         }
 
         private DraggableDocument CreatePaperDocument(

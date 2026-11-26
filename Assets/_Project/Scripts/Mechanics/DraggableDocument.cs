@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering;
 #if ENABLE_INPUT_SYSTEM
@@ -16,6 +17,9 @@ namespace TribunalDasAlmas.Mechanics
     public class DraggableDocument : MonoBehaviour
     {
         public const string DefaultSortingLayerName = "30_DraggableDocs";
+
+        [Header("Identificação")]
+        [SerializeField] private bool isRelic;
 
         [Header("Referências")]
         [SerializeField] private Camera targetCamera;
@@ -39,6 +43,7 @@ namespace TribunalDasAlmas.Mechanics
 
         private BoxCollider2D _boxCollider;
         private SortingGroup _sortingGroup;
+        private Rigidbody2D _rigidbody2D;
 
         private bool _isInteractable = true;
         private bool _isDragging;
@@ -58,9 +63,22 @@ namespace TribunalDasAlmas.Mechanics
         private Vector3 _clampStartPosition;
         private Vector3 _clampTargetPosition;
 
+        private bool _isRejectionSliding;
+        private Vector2 _rejectionVelocity;
+        private float _rejectionDeceleration;
+
+        public bool IsRelic
+        {
+            get => isRelic;
+            set => isRelic = value;
+        }
+
         public bool IsDragging => _isDragging;
         public bool IsZoomed => _isZoomed;
         public int CurrentSortingOrder => _sortingGroup != null ? _sortingGroup.sortingOrder : 0;
+
+        public event Action<DraggableDocument> OnDragStarted;
+        public event Action<DraggableDocument> OnDragEnded;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStaticState()
@@ -73,6 +91,7 @@ namespace TribunalDasAlmas.Mechanics
         {
             _boxCollider = GetComponent<BoxCollider2D>();
             _sortingGroup = GetComponent<SortingGroup>();
+            _rigidbody2D = GetComponent<Rigidbody2D>();
 
             _baseScale = transform.localScale;
             if (_baseScale == Vector3.zero)
@@ -102,6 +121,7 @@ namespace TribunalDasAlmas.Mechanics
         private void Update()
         {
             UpdateZoomAnimation();
+            UpdateRejectionImpulse();
             UpdateSoftClampAnimation();
 
             if (!_isInteractable)
@@ -141,7 +161,10 @@ namespace TribunalDasAlmas.Mechanics
                     EndDrag(applySoftClamp: true);
                 }
             }
-            else if (leftDown && s_currentlyDragged == null && IsTopmostDocumentAtPoint(mouseWorldPoint2D))
+            else if (leftDown &&
+                     s_currentlyDragged == null &&
+                     !IsClickBlockedByActiveTool(mouseWorldPoint2D) &&
+                     IsTopmostDocumentAtPoint(mouseWorldPoint2D))
             {
                 BeginDrag(mouseWorldPos);
             }
@@ -197,6 +220,35 @@ namespace TribunalDasAlmas.Mechanics
         }
 
         /// <summary>
+        /// Cancela uma animação de soft clamp em andamento (ex.: quando uma relíquia é aceita no prato da balança).
+        /// </summary>
+        public void CancelSoftClamp()
+        {
+            _isSoftClamping = false;
+        }
+
+        /// <summary>
+        /// Aplica um pulso de força física para empurrar o documento para fora de uma área inválida (ex.: prato da balança).
+        /// Utiliza Rigidbody2D dinâmico quando disponível ou simula impulso com desaceleração suave em 2D.
+        /// </summary>
+        public void ApplyRejectionImpulse(Vector2 direction, float impulseStrength = 7.5f, float deceleration = 22f)
+        {
+            Vector2 safeDir = direction.sqrMagnitude > 0.0001f ? direction.normalized : Vector2.right;
+            _isSoftClamping = false;
+
+            if (_rigidbody2D != null && _rigidbody2D.bodyType == RigidbodyType2D.Dynamic)
+            {
+                _rigidbody2D.linearVelocity = Vector2.zero;
+                _rigidbody2D.AddForce(safeDir * impulseStrength, ForceMode2D.Impulse);
+                return;
+            }
+
+            _rejectionVelocity = safeDir * impulseStrength;
+            _rejectionDeceleration = Mathf.Max(1f, deceleration);
+            _isRejectionSliding = true;
+        }
+
+        /// <summary>
         /// Eleva este documento para o topo da pilha de documentos em repouso.
         /// </summary>
         public void BringToFront()
@@ -247,6 +299,8 @@ namespace TribunalDasAlmas.Mechanics
             s_currentlyDragged = this;
 
             _isSoftClamping = false;
+            _isRejectionSliding = false;
+            _rejectionVelocity = Vector2.zero;
             _initialZ = transform.position.z;
             _dragOffset = transform.position - mouseWorldPos;
             _dragOffset.z = 0f;
@@ -255,6 +309,8 @@ namespace TribunalDasAlmas.Mechanics
             s_highestRestingOrder++;
             _restingOrder = s_highestRestingOrder;
             _sortingGroup.sortingOrder = _restingOrder + dragOrderBoost;
+
+            OnDragStarted?.Invoke(this);
         }
 
         private void EndDrag(bool applySoftClamp)
@@ -271,7 +327,9 @@ namespace TribunalDasAlmas.Mechanics
                 _sortingGroup.sortingOrder = _restingOrder;
             }
 
-            if (applySoftClamp)
+            OnDragEnded?.Invoke(this);
+
+            if (applySoftClamp && !_isRejectionSliding)
             {
                 StartSoftClampIfOutOfBounds();
             }
@@ -350,6 +408,61 @@ namespace TribunalDasAlmas.Mechanics
             }
 
             _isSoftClamping = true;
+        }
+
+        private void UpdateRejectionImpulse()
+        {
+            if (!_isRejectionSliding)
+            {
+                return;
+            }
+
+            Vector3 pos = transform.position;
+            pos.x += _rejectionVelocity.x * Time.deltaTime;
+            pos.y += _rejectionVelocity.y * Time.deltaTime;
+            pos.z = _initialZ;
+            transform.position = pos;
+
+            _rejectionVelocity = Vector2.MoveTowards(
+                _rejectionVelocity,
+                Vector2.zero,
+                _rejectionDeceleration * Time.deltaTime);
+
+            if (_rejectionVelocity.sqrMagnitude <= 0.01f)
+            {
+                _rejectionVelocity = Vector2.zero;
+                _isRejectionSliding = false;
+                StartSoftClampIfOutOfBounds();
+            }
+        }
+
+        private bool IsClickBlockedByActiveTool(Vector2 worldPoint)
+        {
+            if (RevealingInkController.WasInkConsumedThisFrame)
+            {
+                return true;
+            }
+
+            // Se a Tinta Reveladora estiver equipada e o clique atingir uma área tarjada revelável,
+            // evita arrastar o documento acidentalmente durante a aplicação da tinta.
+            if (!RevealingInkController.IsInkToolEquipped)
+            {
+                return false;
+            }
+
+            Collider2D[] hits = Physics2D.OverlapPointAll(worldPoint);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i] != null &&
+                    hits[i].TryGetComponent(out RedactedArea redactedArea) &&
+                    redactedArea.isActiveAndEnabled &&
+                    !redactedArea.EvidenceUnlocked)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void UpdateSoftClampAnimation()
