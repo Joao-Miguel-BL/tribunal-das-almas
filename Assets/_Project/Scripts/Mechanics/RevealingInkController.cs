@@ -21,7 +21,8 @@ namespace TribunalDasAlmas.Mechanics
         public const string ActiveToolSortingLayerName = "40_ActiveTool_VFX";
 
         private static readonly Color ColorInkBottle = new Color32(0x34, 0x3C, 0x47, 0xFF);   // #343C47 Vidro/Metal escuro
-        private static readonly Color ColorInkViolet = new Color32(0xBB, 0x8F, 0xCE, 0xFF);   // #BB8FCE Violeta Revelador
+        private static readonly Color ColorInkLiquid = new Color32(0x6C, 0x34, 0x83, 0xFF);   // #6C3483 Tinta Reveladora
+        private static readonly Color ColorInkViolet = new Color32(0xBB, 0x8F, 0xCE, 0xFF);   // #BB8FCE Halo / Contador
         private static readonly Color ColorInkEmpty = new Color32(0x2E, 0x23, 0x1E, 0xFF);    // #2E231E Vazio
 
         [Header("Estoque de Tinta (Turno)")]
@@ -264,7 +265,7 @@ namespace TribunalDasAlmas.Mechanics
             {
                 float fillRatio = (float)inkDrops / MaxInkDrops;
                 inkwellLiquidRenderer.color = inkDrops > 0
-                    ? Color.Lerp(ColorInkEmpty, ColorInkViolet, Mathf.Lerp(0.35f, 1f, fillRatio))
+                    ? Color.Lerp(ColorInkEmpty, ColorInkLiquid, Mathf.Lerp(0.45f, 1f, fillRatio))
                     : ColorInkEmpty;
             }
 

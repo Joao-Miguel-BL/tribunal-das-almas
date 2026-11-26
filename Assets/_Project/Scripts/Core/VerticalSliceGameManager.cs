@@ -43,6 +43,11 @@ namespace TribunalDasAlmas.Core
         [Header("Casos da Vertical Slice (Ordem Sequencial)")]
         [SerializeField] private List<SoulCaseData> verticalSliceCases = new List<SoulCaseData>();
         [SerializeField] private bool autoStartOnPlay = true;
+        [SerializeField] private bool autoBuildDeskPlaceholders = true;
+
+        [Header("Referências da Cena (Opcional — Preenchidas pelo Scene Builder)")]
+        [SerializeField] private TextMeshPro statusHeaderText;
+        [SerializeField] private List<GameObject> scenePreviewObjectsToClear = new List<GameObject>();
 
         [Header("Dimensões e Limites da Bancada (Zona C)")]
         [SerializeField] private Vector2 deskBoundsMin = new Vector2(-4.5f, -2.5f);
@@ -56,6 +61,8 @@ namespace TribunalDasAlmas.Core
         [SerializeField] private Vector2 certificateSpawnPos = new Vector2(-1.4f, -0.95f);
         [SerializeField] private Vector2 auxiliarySlipSize = new Vector2(2.7f, 2.2f);
         [SerializeField] private Vector2 auxiliarySlipSpawnPos = new Vector2(2.15f, -1.05f);
+        [SerializeField] private Vector2 relicItemSize = new Vector2(2.0f, 1.0f);
+        [SerializeField] private float documentFontSize = 2.0f;
         [SerializeField] private TMP_FontAsset customFontAsset;
 
         [Header("Transições e Despacho (Zona E)")]
@@ -107,7 +114,17 @@ namespace TribunalDasAlmas.Core
         private void Awake()
         {
             CreateProceduralSprites();
-            BuildDeskPlaceholders();
+
+            if (statusHeaderText != null)
+            {
+                _statusHeaderText = statusHeaderText;
+            }
+
+            if (autoBuildDeskPlaceholders)
+            {
+                BuildDeskPlaceholders();
+            }
+
             EnsureDocumentsContainer();
         }
 
@@ -162,6 +179,7 @@ namespace TribunalDasAlmas.Core
                 _transitionCoroutine = null;
             }
 
+            ClearScenePreviewObjects();
             ClearActiveDocumentsImmediate();
             _correctVerdictsCount = 0;
             _currentCaseIndex = 0;
@@ -422,12 +440,12 @@ namespace TribunalDasAlmas.Core
             {
                 Vector3 relicTargetPos = new Vector3(
                     Mathf.Clamp(auxiliarySlipSpawnPos.x, deskBoundsMin.x, deskBoundsMax.x),
-                    Mathf.Clamp(auxiliarySlipSpawnPos.y + 1.4f, deskBoundsMin.y, deskBoundsMax.y),
+                    Mathf.Clamp(auxiliarySlipSpawnPos.y + (auxiliarySlipSize.y * 0.65f) + (relicItemSize.y * 0.5f), deskBoundsMin.y, deskBoundsMax.y),
                     0f);
 
                 DraggableDocument relicItem = CreatePaperDocument(
                     $"Relic_Caso0{caseIndex + 1}_{caseData.relicName}",
-                    new Vector2(2.0f, 1.0f),
+                    relicItemSize,
                     $"<b>[RELÍQUIA]</b>\n{caseData.relicName}",
                     relicTargetPos);
                 relicItem.IsRelic = true;
@@ -445,7 +463,7 @@ namespace TribunalDasAlmas.Core
             redactedObj.transform.localPosition = new Vector3(0f, -certificateSize.y * 0.32f, -0.02f);
 
             RedactedArea redactedArea = redactedObj.AddComponent<RedactedArea>();
-            redactedArea.Configure(caseData, new Vector2(certificateSize.x - 0.5f, 0.95f), customFontAsset);
+            redactedArea.Configure(caseData, new Vector2(certificateSize.x - 0.6f, certificateSize.y * 0.22f), customFontAsset);
         }
 
         private DraggableDocument CreatePaperDocument(
@@ -486,7 +504,7 @@ namespace TribunalDasAlmas.Core
             textObj.transform.localPosition = new Vector3(0f, 0f, -0.01f);
 
             TextMeshPro tmp = textObj.AddComponent<TextMeshPro>();
-            ConfigureTmpComponent(tmp, paperSize - new Vector2(0.35f, 0.35f), contentText, 2.0f, TextAlignmentOptions.TopLeft);
+            ConfigureTmpComponent(tmp, paperSize - new Vector2(0.45f, 0.45f), contentText, documentFontSize, TextAlignmentOptions.TopLeft);
             tmp.color = ColorInkOutline;
 
             MeshRenderer textRenderer = tmp.GetComponent<MeshRenderer>();
@@ -765,6 +783,24 @@ namespace TribunalDasAlmas.Core
 
                 yield return null;
             }
+        }
+
+        private void ClearScenePreviewObjects()
+        {
+            if (scenePreviewObjectsToClear == null || scenePreviewObjectsToClear.Count == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < scenePreviewObjectsToClear.Count; i++)
+            {
+                if (scenePreviewObjectsToClear[i] != null)
+                {
+                    Destroy(scenePreviewObjectsToClear[i]);
+                }
+            }
+
+            scenePreviewObjectsToClear.Clear();
         }
 
         private void ClearActiveDocumentsImmediate()

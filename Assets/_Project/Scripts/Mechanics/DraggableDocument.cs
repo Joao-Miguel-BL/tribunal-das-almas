@@ -273,10 +273,16 @@ namespace TribunalDasAlmas.Mechanics
             GameObject stampObj = new GameObject($"AppliedStamp_{verdict}");
             stampObj.transform.SetParent(transform, false);
 
-            // Mantém o selo dentro dos limites internos do papel
-            Vector2 halfSize = _boxCollider != null ? _boxCollider.size * 0.5f : new Vector2(1.5f, 1.8f);
-            float clampedX = Mathf.Clamp(localPosition.x, -Mathf.Max(0.2f, halfSize.x - 0.85f), Mathf.Max(0.2f, halfSize.x - 0.85f));
-            float clampedY = Mathf.Clamp(localPosition.y, -Mathf.Max(0.2f, halfSize.y - 0.45f), Mathf.Max(0.2f, halfSize.y - 0.45f));
+            // Mantém o selo proporcional ao documento e dentro dos limites internos do papel
+            Vector2 paperSize = _boxCollider != null ? _boxCollider.size : new Vector2(3.4f, 4.3f);
+            float scaleFactor = Mathf.Clamp(paperSize.x / 3.4f, 0.85f, 2.5f);
+            Vector2 sealSize = new Vector2(1.75f * scaleFactor, 0.58f * scaleFactor);
+
+            Vector2 halfSize = paperSize * 0.5f;
+            float marginX = sealSize.x * 0.52f;
+            float marginY = sealSize.y * 0.55f;
+            float clampedX = Mathf.Clamp(localPosition.x, -Mathf.Max(0.2f, halfSize.x - marginX), Mathf.Max(0.2f, halfSize.x - marginX));
+            float clampedY = Mathf.Clamp(localPosition.y, -Mathf.Max(0.2f, halfSize.y - marginY), Mathf.Max(0.2f, halfSize.y - marginY));
 
             stampObj.transform.localPosition = new Vector3(clampedX, clampedY, -0.025f);
             stampObj.transform.localRotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(-11f, -5f));
@@ -289,7 +295,7 @@ namespace TribunalDasAlmas.Mechanics
             SpriteRenderer frameSr = stampObj.AddComponent<SpriteRenderer>();
             frameSr.sprite = _generatedStampSprite;
             frameSr.drawMode = SpriteDrawMode.Sliced;
-            frameSr.size = new Vector2(1.75f, 0.58f);
+            frameSr.size = sealSize;
             frameSr.color = new Color(sealColor.r, sealColor.g, sealColor.b, 0.92f);
             frameSr.sortingLayerName = docLayer;
             frameSr.sortingOrder = 6;
@@ -300,9 +306,9 @@ namespace TribunalDasAlmas.Mechanics
             labelObj.transform.localPosition = new Vector3(0f, 0f, -0.005f);
 
             TextMeshPro tmp = labelObj.AddComponent<TextMeshPro>();
-            tmp.rectTransform.sizeDelta = new Vector2(1.65f, 0.5f);
+            tmp.rectTransform.sizeDelta = sealSize * 0.94f;
             tmp.text = sealLabel.ToUpperInvariant();
-            tmp.fontSize = 2.0f;
+            tmp.fontSize = 2.0f * scaleFactor;
             tmp.fontStyle = FontStyles.Bold;
             tmp.alignment = TextAlignmentOptions.Center;
             tmp.textWrappingMode = TextWrappingModes.NoWrap;

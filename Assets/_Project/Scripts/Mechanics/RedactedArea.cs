@@ -159,7 +159,8 @@ namespace TribunalDasAlmas.Mechanics
 
             if (hiddenTextMesh != null)
             {
-                hiddenTextMesh.rectTransform.sizeDelta = _configuredSize - new Vector2(0.12f, 0.08f);
+                hiddenTextMesh.rectTransform.sizeDelta = _configuredSize - new Vector2(0.2f, 0.12f);
+                hiddenTextMesh.fontSize = Mathf.Clamp(_configuredSize.y * 1.85f, 1.75f, 3.4f);
                 if (fontAsset != null)
                 {
                     hiddenTextMesh.font = fontAsset;
