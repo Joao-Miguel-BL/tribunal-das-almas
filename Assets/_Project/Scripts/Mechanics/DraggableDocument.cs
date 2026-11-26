@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using TMPro;
+using TribunalDasAlmas.Core;
 using UnityEngine;
 using UnityEngine.Rendering;
 #if ENABLE_INPUT_SYSTEM
@@ -20,6 +23,7 @@ namespace TribunalDasAlmas.Mechanics
 
         [Header("Identificação")]
         [SerializeField] private bool isRelic;
+        [SerializeField] private bool isDeathCertificate;
 
         [Header("Referências")]
         [SerializeField] private Camera targetCamera;
@@ -67,10 +71,23 @@ namespace TribunalDasAlmas.Mechanics
         private Vector2 _rejectionVelocity;
         private float _rejectionDeceleration;
 
+        private Coroutine _warningFlashCoroutine;
+        private Color _originalRendererColor = Color.white;
+        private bool _hasCachedRendererColor;
+        private GameObject _appliedStampVisual;
+        private Texture2D _generatedStampTexture;
+        private Sprite _generatedStampSprite;
+
         public bool IsRelic
         {
             get => isRelic;
             set => isRelic = value;
+        }
+
+        public bool IsDeathCertificate
+        {
+            get => isDeathCertificate;
+            set => isDeathCertificate = value;
         }
 
         public bool IsDragging => _isDragging;
@@ -115,6 +132,21 @@ namespace TribunalDasAlmas.Mechanics
             if (_isDragging)
             {
                 EndDrag(applySoftClamp: false);
+            }
+
+            RestoreWarningFlashColor();
+        }
+
+        private void OnDestroy()
+        {
+            if (_generatedStampSprite != null)
+            {
+                Destroy(_generatedStampSprite);
+            }
+
+            if (_generatedStampTexture != null)
+            {
+                Destroy(_generatedStampTexture);
             }
         }
 
@@ -217,6 +249,101 @@ namespace TribunalDasAlmas.Mechanics
             }
 
             StartZoomTransition(targetScale);
+        }
+
+        /// <summary>
+        /// Aplica um selo visual de carimbo diretamente sobre o papel do documento,
+        /// acompanhando o SortingGroup e o arraste da Certidão de Passamento.
+        /// </summary>
+        public void ApplyStampSeal(
+            VerdictType verdict,
+            Color sealColor,
+            string sealLabel,
+            Vector2 localPosition,
+            TMP_FontAsset fontAsset = null)
+        {
+            if (_appliedStampVisual != null)
+            {
+                Destroy(_appliedStampVisual);
+                _appliedStampVisual = null;
+            }
+
+            EnsureStampBorderSprite();
+
+            GameObject stampObj = new GameObject($"AppliedStamp_{verdict}");
+            stampObj.transform.SetParent(transform, false);
+
+            // Mantém o selo dentro dos limites internos do papel
+            Vector2 halfSize = _boxCollider != null ? _boxCollider.size * 0.5f : new Vector2(1.5f, 1.8f);
+            float clampedX = Mathf.Clamp(localPosition.x, -Mathf.Max(0.2f, halfSize.x - 0.85f), Mathf.Max(0.2f, halfSize.x - 0.85f));
+            float clampedY = Mathf.Clamp(localPosition.y, -Mathf.Max(0.2f, halfSize.y - 0.45f), Mathf.Max(0.2f, halfSize.y - 0.45f));
+
+            stampObj.transform.localPosition = new Vector3(clampedX, clampedY, -0.025f);
+            stampObj.transform.localRotation = Quaternion.Euler(0f, 0f, UnityEngine.Random.Range(-11f, -5f));
+
+            string docLayer = _sortingGroup != null && !string.IsNullOrEmpty(_sortingGroup.sortingLayerName)
+                ? _sortingGroup.sortingLayerName
+                : DefaultSortingLayerName;
+
+            // Moldura do selo (9-sliced com centro translúcido para parecer tinta de carimbo)
+            SpriteRenderer frameSr = stampObj.AddComponent<SpriteRenderer>();
+            frameSr.sprite = _generatedStampSprite;
+            frameSr.drawMode = SpriteDrawMode.Sliced;
+            frameSr.size = new Vector2(1.75f, 0.58f);
+            frameSr.color = new Color(sealColor.r, sealColor.g, sealColor.b, 0.92f);
+            frameSr.sortingLayerName = docLayer;
+            frameSr.sortingOrder = 6;
+
+            // Texto do selo
+            GameObject labelObj = new GameObject("StampLabel");
+            labelObj.transform.SetParent(stampObj.transform, false);
+            labelObj.transform.localPosition = new Vector3(0f, 0f, -0.005f);
+
+            TextMeshPro tmp = labelObj.AddComponent<TextMeshPro>();
+            tmp.rectTransform.sizeDelta = new Vector2(1.65f, 0.5f);
+            tmp.text = sealLabel.ToUpperInvariant();
+            tmp.fontSize = 2.0f;
+            tmp.fontStyle = FontStyles.Bold;
+            tmp.alignment = TextAlignmentOptions.Center;
+            tmp.textWrappingMode = TextWrappingModes.NoWrap;
+            tmp.color = new Color(sealColor.r, sealColor.g, sealColor.b, 0.96f);
+
+            if (fontAsset != null)
+            {
+                tmp.font = fontAsset;
+            }
+            else if (tmp.font == null && TMP_Settings.defaultFontAsset != null)
+            {
+                tmp.font = TMP_Settings.defaultFontAsset;
+            }
+
+            MeshRenderer textMr = tmp.GetComponent<MeshRenderer>();
+            if (textMr != null)
+            {
+                textMr.sortingLayerName = docLayer;
+                textMr.sortingOrder = 7;
+            }
+
+            _appliedStampVisual = stampObj;
+        }
+
+        /// <summary>
+        /// Pisca suavemente o papel do documento em vermelho (feedback de trava de segurança ao tentar despachar sem carimbo).
+        /// </summary>
+        public void FlashWarningRed(int flashCount = 2, float singleFlashDuration = 0.24f)
+        {
+            if (!gameObject.activeInHierarchy)
+            {
+                return;
+            }
+
+            if (_warningFlashCoroutine != null)
+            {
+                StopCoroutine(_warningFlashCoroutine);
+                RestoreWarningFlashColor();
+            }
+
+            _warningFlashCoroutine = StartCoroutine(WarningFlashRoutine(Mathf.Max(1, flashCount), Mathf.Max(0.08f, singleFlashDuration)));
         }
 
         /// <summary>
@@ -438,7 +565,13 @@ namespace TribunalDasAlmas.Mechanics
 
         private bool IsClickBlockedByActiveTool(Vector2 worldPoint)
         {
-            if (RevealingInkController.WasInkConsumedThisFrame)
+            if (RevealingInkController.WasInkConsumedThisFrame || StampController.WasStampAppliedThisFrame)
+            {
+                return true;
+            }
+
+            // Se um carimbo estiver equipado sobre a Certidão de Passamento, prioriza a aplicação do carimbo.
+            if (isDeathCertificate && StampController.IsAnyStampEquipped)
             {
                 return true;
             }
@@ -463,6 +596,103 @@ namespace TribunalDasAlmas.Mechanics
             }
 
             return false;
+        }
+
+        private IEnumerator WarningFlashRoutine(int flashCount, float singleFlashDuration)
+        {
+            SpriteRenderer paperRenderer = GetComponent<SpriteRenderer>();
+            if (paperRenderer == null)
+            {
+                _warningFlashCoroutine = null;
+                yield break;
+            }
+
+            if (!_hasCachedRendererColor)
+            {
+                _originalRendererColor = paperRenderer.color;
+                _hasCachedRendererColor = true;
+            }
+
+            Color softWarningRed = new Color(1.0f, 0.56f, 0.56f, _originalRendererColor.a);
+            float halfDuration = singleFlashDuration * 0.5f;
+
+            for (int i = 0; i < flashCount; i++)
+            {
+                float elapsed = 0f;
+                while (elapsed < halfDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / halfDuration);
+                    paperRenderer.color = Color.Lerp(_originalRendererColor, softWarningRed, t);
+                    yield return null;
+                }
+
+                elapsed = 0f;
+                while (elapsed < halfDuration)
+                {
+                    elapsed += Time.deltaTime;
+                    float t = Mathf.Clamp01(elapsed / halfDuration);
+                    paperRenderer.color = Color.Lerp(softWarningRed, _originalRendererColor, t);
+                    yield return null;
+                }
+            }
+
+            RestoreWarningFlashColor();
+            _warningFlashCoroutine = null;
+        }
+
+        private void RestoreWarningFlashColor()
+        {
+            if (!_hasCachedRendererColor)
+            {
+                return;
+            }
+
+            SpriteRenderer paperRenderer = GetComponent<SpriteRenderer>();
+            if (paperRenderer != null)
+            {
+                paperRenderer.color = _originalRendererColor;
+            }
+        }
+
+        private void EnsureStampBorderSprite()
+        {
+            if (_generatedStampSprite != null)
+            {
+                return;
+            }
+
+            const int size = 16;
+            _generatedStampTexture = new Texture2D(size, size, TextureFormat.RGBA32, false)
+            {
+                filterMode = FilterMode.Point,
+                wrapMode = TextureWrapMode.Clamp
+            };
+
+            Color32 borderPixel = new Color32(255, 255, 255, 255);
+            Color32 fillPixel = new Color32(255, 255, 255, 34);
+            Color32[] pixels = new Color32[size * size];
+
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    bool isBorder = x <= 1 || y <= 1 || x >= size - 2 || y >= size - 2;
+                    pixels[y * size + x] = isBorder ? borderPixel : fillPixel;
+                }
+            }
+
+            _generatedStampTexture.SetPixels32(pixels);
+            _generatedStampTexture.Apply();
+
+            _generatedStampSprite = Sprite.Create(
+                _generatedStampTexture,
+                new Rect(0, 0, size, size),
+                new Vector2(0.5f, 0.5f),
+                100f,
+                0u,
+                SpriteMeshType.FullRect,
+                new Vector4(2f, 2f, 2f, 2f));
         }
 
         private void UpdateSoftClampAnimation()

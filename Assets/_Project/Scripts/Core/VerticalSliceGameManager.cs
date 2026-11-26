@@ -58,9 +58,11 @@ namespace TribunalDasAlmas.Core
         [SerializeField] private Vector2 auxiliarySlipSpawnPos = new Vector2(2.15f, -1.05f);
         [SerializeField] private TMP_FontAsset customFontAsset;
 
-        [Header("Transições")]
+        [Header("Transições e Despacho (Zona E)")]
         [SerializeField] private float documentSlideDuration = 0.35f;
         [SerializeField] private float offscreenSlideOffsetX = 9.5f;
+        [SerializeField] private float bottomSlotExitY = -6.2f;
+        [SerializeField] private bool autoEnsureEndScreen = true;
 
         private readonly List<DraggableDocument> _activeDocuments = new List<DraggableDocument>();
         private readonly List<Texture2D> _generatedTextures = new List<Texture2D>();
@@ -72,16 +74,25 @@ namespace TribunalDasAlmas.Core
         private Transform _deskVisualRoot;
         private Transform _documentsRoot;
         private TextMeshPro _statusHeaderText;
+        private DraggableDocument _currentCertificateDocument;
 
         private Coroutine _transitionCoroutine;
         private int _currentCaseIndex = -1;
         private int _correctVerdictsCount;
         private DeskState _currentState = DeskState.Idle;
+        private bool _hasStampApplied;
+        private VerdictType _selectedVerdict;
 
         public DeskState CurrentState => _currentState;
         public int CurrentCaseIndex => _currentCaseIndex;
         public int TotalCases => verticalSliceCases != null ? verticalSliceCases.Count : 0;
         public int CorrectVerdictsCount => _correctVerdictsCount;
+        public bool HasStampApplied => _hasStampApplied;
+        public VerdictType SelectedVerdict => _selectedVerdict;
+        public DraggableDocument CurrentCertificateDocument => _currentCertificateDocument;
+        public Vector2 DeskBoundsMin => deskBoundsMin;
+        public Vector2 DeskBoundsMax => deskBoundsMax;
+        public TMP_FontAsset CustomFontAsset => customFontAsset;
         public SoulCaseData CurrentCase =>
             verticalSliceCases != null && _currentCaseIndex >= 0 && _currentCaseIndex < verticalSliceCases.Count
                 ? verticalSliceCases[_currentCaseIndex]
@@ -89,6 +100,7 @@ namespace TribunalDasAlmas.Core
 
         public event Action<DeskState> OnStateChanged;
         public event Action<SoulCaseData, int> OnCaseLoaded;
+        public event Action<VerdictType> OnStampApplied;
         public event Action<SoulCaseData, VerdictType, bool> OnCaseCompleted;
         public event Action<int, int> OnAllCasesCompleted;
 
@@ -153,12 +165,48 @@ namespace TribunalDasAlmas.Core
             ClearActiveDocumentsImmediate();
             _correctVerdictsCount = 0;
             _currentCaseIndex = 0;
+            _hasStampApplied = false;
+
+            if (RevealingInkController.ActiveInstance != null)
+            {
+                RevealingInkController.ActiveInstance.RefillInkForNewShift();
+            }
 
             _transitionCoroutine = StartCoroutine(LoadCaseRoutine(_currentCaseIndex, animateOutPrevious: false));
         }
 
         /// <summary>
-        /// Registra a conclusão do caso atual sem especificar veredito e avança suavemente para o próximo.
+        /// Registra o selo de carimbo aplicado sobre a Certidão de Passamento atual.
+        /// </summary>
+        public void RegisterAppliedStamp(VerdictType verdict)
+        {
+            if (_currentState != DeskState.InspectingCase || CurrentCase == null)
+            {
+                return;
+            }
+
+            _hasStampApplied = true;
+            _selectedVerdict = verdict;
+
+            Debug.Log($"{LogPrefix} Carimbo '{verdict}' aplicado na Certidão de '{CurrentCase.soulName}'. hasStampApplied = true.");
+            OnStampApplied?.Invoke(verdict);
+        }
+
+        /// <summary>
+        /// Aciona o feedback de aviso visual (piscar em vermelho suave 2x) na Certidão atual
+        /// quando o jogador tenta despachar sem carimbo.
+        /// </summary>
+        public void FlashCurrentCertificateWarning(int flashCount = 2)
+        {
+            if (_currentCertificateDocument != null)
+            {
+                _currentCertificateDocument.FlashWarningRed(flashCount);
+            }
+        }
+
+        /// <summary>
+        /// Registra a conclusão do caso atual utilizando o veredito carimbado (ou o esperado como fallback)
+        /// e recolhe os papéis pela fresta inferior (Zona E) avançando suavemente para o próximo caso.
         /// </summary>
         public void CompleteCurrentCase()
         {
@@ -168,7 +216,8 @@ namespace TribunalDasAlmas.Core
                 return;
             }
 
-            CompleteCurrentCase(CurrentCase.expectedVerdict);
+            VerdictType verdictToSubmit = _hasStampApplied ? _selectedVerdict : CurrentCase.expectedVerdict;
+            CompleteCurrentCase(verdictToSubmit);
         }
 
         /// <summary>
@@ -252,6 +301,8 @@ namespace TribunalDasAlmas.Core
             }
 
             SetState(DeskState.LoadingCase);
+            _hasStampApplied = false;
+            _currentCertificateDocument = null;
 
             List<(DraggableDocument doc, Vector3 targetPos)> spawnedDocs = SpawnCaseDocuments(caseData, caseIndex);
 
@@ -286,8 +337,26 @@ namespace TribunalDasAlmas.Core
             UpdateStatusBanner($"EXPEDIENTE CONCLUÍDO  |  ACERTOS: {_correctVerdictsCount}/{TotalCases}");
 
             Debug.Log($"{LogPrefix} Todos os {TotalCases} casos da Vertical Slice foram concluídos! Acertos: {_correctVerdictsCount}/{TotalCases}.");
+
+            EnsureEndScreenExistsIfConfigured();
             OnAllCasesCompleted?.Invoke(_correctVerdictsCount, TotalCases);
             _transitionCoroutine = null;
+        }
+
+        private void EnsureEndScreenExistsIfConfigured()
+        {
+            if (!autoEnsureEndScreen)
+            {
+                return;
+            }
+
+            VerticalSliceEndScreen existingScreen = FindFirstObjectByType<VerticalSliceEndScreen>();
+            if (existingScreen == null)
+            {
+                GameObject endScreenObj = new GameObject("VerticalSlice_EndScreen");
+                VerticalSliceEndScreen endScreen = endScreenObj.AddComponent<VerticalSliceEndScreen>();
+                endScreen.BindToGameManager(this);
+            }
         }
 
         private List<(DraggableDocument doc, Vector3 targetPos)> SpawnCaseDocuments(SoulCaseData caseData, int caseIndex)
@@ -312,6 +381,8 @@ namespace TribunalDasAlmas.Core
                 certificateSize,
                 certificateBody,
                 certTargetPos);
+            certificateDoc.IsDeathCertificate = true;
+            _currentCertificateDocument = certificateDoc;
 
             // Se o caso possuir trecho censurado (M3 / DD-011), anexa a tarja interativa RedactedArea
             if (caseData.hasRedactedText)
@@ -669,9 +740,10 @@ namespace TribunalDasAlmas.Core
                 doc.ResetZoom(instant: false);
 
                 startPositions[i] = doc.transform.position;
+                // Recolhe os documentos pela fresta inferior (Zona E)
                 targetPositions[i] = new Vector3(
-                    startPositions[i].x - offscreenSlideOffsetX,
-                    startPositions[i].y,
+                    Mathf.Lerp(startPositions[i].x, deskVisualCenter.x, 0.35f),
+                    bottomSlotExitY,
                     startPositions[i].z);
             }
 
