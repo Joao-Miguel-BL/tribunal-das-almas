@@ -402,9 +402,16 @@ namespace TribunalDasAlmas.Core
             certificateDoc.IsDeathCertificate = true;
             _currentCertificateDocument = certificateDoc;
 
-            // Se o caso possuir trecho censurado (M3 / DD-011), anexa a tarja interativa RedactedArea
+            // Se o caso possuir trecho censurado (M3 / DD-011), reserva espaço inferior para a tarja e anexa RedactedArea
             if (caseData.hasRedactedText)
             {
+                TextMeshPro certTmp = certificateDoc.GetComponentInChildren<TextMeshPro>();
+                if (certTmp != null)
+                {
+                    certTmp.rectTransform.sizeDelta = new Vector2(certificateSize.x - 0.65f, certificateSize.y * 0.64f);
+                    certTmp.transform.localPosition = new Vector3(0f, certificateSize.y * 0.13f, -0.01f);
+                }
+
                 AttachRedactedAreaToDocument(certificateDoc, caseData);
             }
 
@@ -504,7 +511,7 @@ namespace TribunalDasAlmas.Core
             textObj.transform.localPosition = new Vector3(0f, 0f, -0.01f);
 
             TextMeshPro tmp = textObj.AddComponent<TextMeshPro>();
-            ConfigureTmpComponent(tmp, paperSize - new Vector2(0.45f, 0.45f), contentText, documentFontSize, TextAlignmentOptions.TopLeft);
+            ConfigureTmpComponent(tmp, paperSize - new Vector2(0.65f, 0.65f), contentText, documentFontSize, TextAlignmentOptions.TopLeft);
             tmp.color = ColorInkOutline;
 
             MeshRenderer textRenderer = tmp.GetComponent<MeshRenderer>();
@@ -689,9 +696,12 @@ namespace TribunalDasAlmas.Core
 
             tmp.text = text;
             tmp.fontSize = fontSize;
+            tmp.enableAutoSizing = true;
+            tmp.fontSizeMin = Mathf.Max(2.0f, fontSize * 0.68f);
+            tmp.fontSizeMax = fontSize;
             tmp.alignment = alignment;
             tmp.textWrappingMode = TextWrappingModes.Normal;
-            tmp.overflowMode = TextOverflowModes.Overflow;
+            tmp.overflowMode = TextOverflowModes.Truncate;
         }
 
         private IEnumerator SlideDocumentsInRoutine(List<(DraggableDocument doc, Vector3 targetPos)> docs)

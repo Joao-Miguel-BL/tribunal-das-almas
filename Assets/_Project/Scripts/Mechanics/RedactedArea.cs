@@ -24,7 +24,7 @@ namespace TribunalDasAlmas.Mechanics
 
         private static readonly Color ColorRedactionBar = new Color32(0x1C, 0x20, 0x26, 0xFF);   // #1C2026 Tarja Preta
         private static readonly Color ColorVioletHalo = new Color32(0xBB, 0x8F, 0xCE, 0xFF);     // #BB8FCE Halo Violeta (DD-011)
-        private static readonly Color ColorRevealedInk = new Color32(0x4A, 0x23, 0x5A, 0xFF);    // Tinta revelada legível no papel creme
+        private static readonly Color ColorRevealedInk = new Color32(0x1C, 0x20, 0x26, 0xFF);    // #1C2026 Texto escuro legível no papel creme
 
         [Header("Dados do Caso")]
         [SerializeField] private SoulCaseData soulCaseData;
@@ -159,8 +159,14 @@ namespace TribunalDasAlmas.Mechanics
 
             if (hiddenTextMesh != null)
             {
-                hiddenTextMesh.rectTransform.sizeDelta = _configuredSize - new Vector2(0.2f, 0.12f);
-                hiddenTextMesh.fontSize = Mathf.Clamp(_configuredSize.y * 1.85f, 1.75f, 3.4f);
+                hiddenTextMesh.rectTransform.sizeDelta = _configuredSize - new Vector2(0.24f, 0.14f);
+                float maxFont = Mathf.Clamp(_configuredSize.y * 2.35f, 2.4f, 4.6f);
+                hiddenTextMesh.fontSize = maxFont;
+                hiddenTextMesh.enableAutoSizing = true;
+                hiddenTextMesh.fontSizeMin = Mathf.Max(2.0f, maxFont * 0.65f);
+                hiddenTextMesh.fontSizeMax = maxFont;
+                hiddenTextMesh.fontStyle = FontStyles.Bold | FontStyles.Italic;
+                hiddenTextMesh.color = ColorRevealedInk;
                 if (fontAsset != null)
                 {
                     hiddenTextMesh.font = fontAsset;

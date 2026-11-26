@@ -137,9 +137,10 @@ namespace TribunalDasAlmas.Core.Editor
             camObj.tag = "MainCamera";
             camObj.transform.position = new Vector3(0f, 0f, -10f);
 
+            // Câmera ortográfica padrão em 16:9 sem PixelPerfectCamera/upscaleRT
+            // para renderizar textos TextMeshPro nítidos em resolução nativa (1920x1080).
             Camera cam = camObj.AddComponent<Camera>();
             cam.orthographic = true;
-            // Reference Resolution 640x360 com 16 PPU => 40 x 22.5 unidades de mundo (orthoSize = 11.25)
             cam.orthographicSize = 11.25f;
             cam.clearFlags = CameraClearFlags.SolidColor;
             cam.backgroundColor = ColorInkDark;
@@ -148,13 +149,6 @@ namespace TribunalDasAlmas.Core.Editor
 
             camObj.AddComponent<AudioListener>();
             camObj.AddComponent<UniversalAdditionalCameraData>();
-
-            PixelPerfectCamera ppc = camObj.AddComponent<PixelPerfectCamera>();
-            ppc.assetsPPU = 16;
-            ppc.refResolutionX = 640;
-            ppc.refResolutionY = 360;
-            ppc.gridSnapping = PixelPerfectCamera.GridSnapping.UpscaleRenderTexture;
-            ppc.cropFrame = PixelPerfectCamera.CropFrame.StretchFill;
 
             return cam;
         }
@@ -230,13 +224,16 @@ namespace TribunalDasAlmas.Core.Editor
                 "QuotaBoard_Text",
                 quotaObj.transform,
                 new Vector3(0f, 0f, -0.05f),
-                new Vector2(8.4f, 4.0f),
+                new Vector2(8.6f, 4.2f),
                 "SETOR DE TRIAGEM 7\nQUADRO DE COTAS\nAGUARDANDO CASO...",
-                4.2f,
+                5.4f,
                 TextAlignmentOptions.Center,
-                ColorPaperCream,
+                Color.white,
                 boothLayer,
-                6);
+                6,
+                FontStyles.Bold,
+                autoSize: true,
+                minFontSize: 3.8f);
 
             // Relógio Analógico de Shift (Zona A) com ShiftClockController
             GameObject clockObj = new GameObject("ZoneA_ShiftClock");
@@ -271,14 +268,15 @@ namespace TribunalDasAlmas.Core.Editor
             TextMeshPro clockReadout = CreateWorldTmp(
                 "Clock_Readout",
                 clockObj.transform,
-                new Vector3(0f, -2.65f, -0.05f),
-                new Vector2(3.8f, 1.0f),
+                new Vector3(0f, -2.75f, -0.05f),
+                new Vector2(4.4f, 1.2f),
                 "08:00",
-                4.4f,
+                5.8f,
                 TextAlignmentOptions.Center,
-                ColorPaperCream,
+                Color.white,
                 propsLayer,
-                6);
+                6,
+                FontStyles.Bold);
 
             ShiftClockController clockController = clockObj.AddComponent<ShiftClockController>();
             SerializedObject clockSo = new SerializedObject(clockController);
@@ -353,14 +351,15 @@ namespace TribunalDasAlmas.Core.Editor
             CreateWorldTmp(
                 "Scale_Label",
                 scaleObj.transform,
-                new Vector3(0f, -4.45f, -0.05f),
-                new Vector2(6.5f, 1.0f),
+                new Vector3(0f, -4.55f, -0.05f),
+                new Vector2(8.0f, 1.3f),
                 "BALANÇA DO PESAR",
-                3.2f,
+                4.8f,
                 TextAlignmentOptions.Center,
-                ColorPaperCream,
+                Color.white,
                 propsLayer,
-                5);
+                5,
+                FontStyles.Bold);
 
             WeighingScaleController scaleController = scaleObj.AddComponent<WeighingScaleController>();
             SerializedObject scaleSo = new SerializedObject(scaleController);
@@ -458,14 +457,17 @@ namespace TribunalDasAlmas.Core.Editor
             CreateWorldTmp(
                 "Document_Text",
                 tempRoot.transform,
-                new Vector3(0f, 0.55f, -0.01f),
-                paperSize - new Vector2(0.8f, 2.2f),
+                new Vector3(0f, 0.7f, -0.01f),
+                paperSize - new Vector2(0.75f, 2.3f),
                 "<b>CERTIDÃO DE PASSAMENTO</b>\n────────────────────\nDocumento arrastável (Zona C)\nClique Esq.: Arrastar\nClique Dir.: Zoom 1.35x",
-                3.8f,
+                5.2f,
                 TextAlignmentOptions.TopLeft,
                 ColorInkDark,
                 docLayer,
-                1);
+                1,
+                FontStyles.Normal,
+                autoSize: true,
+                minFontSize: 3.8f);
 
             // Área Tarjada (#1C2026) com halo violeta (#BB8FCE) e RedactedArea
             GameObject redactedObj = new GameObject("RedactedArea_Tarja");
@@ -505,12 +507,14 @@ namespace TribunalDasAlmas.Core.Editor
                 sampleCase != null && !string.IsNullOrWhiteSpace(sampleCase.hiddenRedactedText)
                     ? sampleCase.hiddenRedactedText
                     : "Trecho oculto revelado pela Tinta Reveladora.",
-                3.2f,
+                4.4f,
                 TextAlignmentOptions.MidlineLeft,
-                new Color32(0x4A, 0x23, 0x5A, 0xFF),
+                ColorInkDark,
                 docLayer,
-                3);
-            hiddenTmp.fontStyle = FontStyles.Italic;
+                3,
+                FontStyles.Bold | FontStyles.Italic,
+                autoSize: true,
+                minFontSize: 3.2f);
             hiddenTmp.gameObject.SetActive(false);
 
             RedactedArea redactedArea = redactedObj.AddComponent<RedactedArea>();
@@ -555,14 +559,15 @@ namespace TribunalDasAlmas.Core.Editor
             TextMeshPro inkCounterTmp = CreateWorldTmp(
                 "Inkwell_Counter",
                 inkObj.transform,
-                new Vector3(0f, -1.75f, -0.02f),
-                new Vector2(3.6f, 1.1f),
+                new Vector3(0f, -1.95f, -0.02f),
+                new Vector2(4.4f, 1.4f),
                 "TINTA\n3/3",
-                3.0f,
+                4.4f,
                 TextAlignmentOptions.Center,
-                ColorVioletHalo,
+                Color.white,
                 propsLayer,
-                4);
+                4,
+                FontStyles.Bold);
 
             RevealingInkController inkController = inkObj.AddComponent<RevealingInkController>();
             SerializedObject inkSo = new SerializedObject(inkController);
@@ -606,7 +611,20 @@ namespace TribunalDasAlmas.Core.Editor
 
                 CreateSpriteChild("Stamp_Pad", sObj.transform, new Vector3(0f, -0.22f, 0f), new Vector3(4.1f, 1.15f, 1f), sprites.Square, def.color, propsLayer, 2);
                 CreateSpriteChild("Stamp_Handle", sObj.transform, new Vector3(0f, 0.52f, 0f), new Vector3(1.35f, 0.6f, 1f), sprites.Square, ColorWoodMahogany, propsLayer, 3);
-                CreateWorldTmp("Stamp_Label", sObj.transform, new Vector3(0f, -0.22f, -0.02f), new Vector2(3.9f, 0.95f), def.label, 3.0f, TextAlignmentOptions.Center, ColorPaperCream, propsLayer, 4);
+                CreateWorldTmp(
+                    "Stamp_Label",
+                    sObj.transform,
+                    new Vector3(0f, -0.22f, -0.02f),
+                    new Vector2(3.9f, 1.0f),
+                    def.label,
+                    4.8f,
+                    TextAlignmentOptions.Center,
+                    Color.white,
+                    propsLayer,
+                    4,
+                    FontStyles.Bold,
+                    autoSize: true,
+                    minFontSize: 3.4f);
 
                 slotsProp.InsertArrayElementAtIndex(i);
                 SerializedProperty elem = slotsProp.GetArrayElementAtIndex(i);
@@ -635,7 +653,18 @@ namespace TribunalDasAlmas.Core.Editor
             leverHandle.transform.localPosition = new Vector3(0f, 2.1f, -0.02f);
             CreateSpriteChild("Handle_Knob", leverHandle.transform, Vector3.zero, new Vector3(2.4f, 0.85f, 1f), sprites.Square, ColorStampExpurgo, propsLayer, 4);
 
-            CreateWorldTmp("Lever_Label", leverObj.transform, new Vector3(0f, -3.75f, -0.02f), new Vector2(3.8f, 1.0f), "DESPACHO", 3.0f, TextAlignmentOptions.Center, ColorPaperCream, propsLayer, 5);
+            CreateWorldTmp(
+                "Lever_Label",
+                leverObj.transform,
+                new Vector3(0f, -3.85f, -0.02f),
+                new Vector2(4.6f, 1.2f),
+                "DESPACHO",
+                4.5f,
+                TextAlignmentOptions.Center,
+                Color.white,
+                propsLayer,
+                5,
+                FontStyles.Bold);
 
             PneumaticLeverController leverController = leverObj.AddComponent<PneumaticLeverController>();
             SerializedObject leverSo = new SerializedObject(leverController);
@@ -696,15 +725,23 @@ namespace TribunalDasAlmas.Core.Editor
 
             gmSo.FindProperty("certificateSize").vector2Value = new Vector2(6.8f, 8.4f);
             gmSo.FindProperty("certificateSpawnPos").vector2Value = new Vector2(-2.6f, -4.2f);
-            gmSo.FindProperty("auxiliarySlipSize").vector2Value = new Vector2(5.4f, 4.4f);
-            gmSo.FindProperty("auxiliarySlipSpawnPos").vector2Value = new Vector2(4.4f, -5.6f);
-            gmSo.FindProperty("relicItemSize").vector2Value = new Vector2(4.2f, 2.2f);
-            gmSo.FindProperty("documentFontSize").floatValue = 3.6f;
+            gmSo.FindProperty("auxiliarySlipSize").vector2Value = new Vector2(5.6f, 4.6f);
+            gmSo.FindProperty("auxiliarySlipSpawnPos").vector2Value = new Vector2(4.4f, -5.8f);
+            gmSo.FindProperty("relicItemSize").vector2Value = new Vector2(4.6f, 2.4f);
+            gmSo.FindProperty("documentFontSize").floatValue = 5.2f;
 
             gmSo.FindProperty("offscreenSlideOffsetX").floatValue = 16.0f;
             gmSo.FindProperty("bottomSlotExitY").floatValue = -14.5f;
 
             gmSo.ApplyModifiedPropertiesWithoutUndo();
+            EditorUtility.SetDirty(gameManager);
+
+            List<string> caseNames = new List<string>(loadedCases.Count);
+            for (int i = 0; i < loadedCases.Count; i++)
+            {
+                caseNames.Add(loadedCases[i] != null ? loadedCases[i].name : "null");
+            }
+            Debug.Log($"{LogPrefix} Casos vinculados ao _GameManager.verticalSliceCases: {string.Join(", ", caseNames)}");
         }
 
         private static void ConfigureEndScreen(VerticalSliceEndScreen endScreen, VerticalSliceGameManager gameManager)
@@ -935,7 +972,10 @@ namespace TribunalDasAlmas.Core.Editor
             TextAlignmentOptions alignment,
             Color color,
             string sortingLayer,
-            int sortingOrder)
+            int sortingOrder,
+            FontStyles fontStyle = FontStyles.Normal,
+            bool autoSize = false,
+            float minFontSize = 2.0f)
         {
             GameObject obj = new GameObject(name);
             obj.transform.SetParent(parent, false);
@@ -945,9 +985,17 @@ namespace TribunalDasAlmas.Core.Editor
             tmp.rectTransform.sizeDelta = rectSize;
             tmp.text = content;
             tmp.fontSize = fontSize;
+            tmp.fontStyle = fontStyle;
             tmp.alignment = alignment;
             tmp.textWrappingMode = TextWrappingModes.Normal;
             tmp.color = color;
+
+            if (autoSize)
+            {
+                tmp.enableAutoSizing = true;
+                tmp.fontSizeMin = Mathf.Min(minFontSize, fontSize);
+                tmp.fontSizeMax = fontSize;
+            }
 
             if (tmp.font == null && TMP_Settings.defaultFontAsset != null)
             {

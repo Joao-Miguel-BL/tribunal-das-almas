@@ -419,11 +419,11 @@ namespace TribunalDasAlmas.Mechanics
                 TextMeshPro tmp = labelObj.AddComponent<TextMeshPro>();
                 tmp.rectTransform.sizeDelta = new Vector2(1.55f, 0.45f);
                 tmp.text = def.label;
-                tmp.fontSize = 1.6f;
+                tmp.fontSize = 2.4f;
                 tmp.fontStyle = FontStyles.Bold;
                 tmp.alignment = TextAlignmentOptions.Center;
                 tmp.textWrappingMode = TextWrappingModes.NoWrap;
-                tmp.color = ColorLabelLight;
+                tmp.color = Color.white;
 
                 if (customFontAsset != null)
                 {

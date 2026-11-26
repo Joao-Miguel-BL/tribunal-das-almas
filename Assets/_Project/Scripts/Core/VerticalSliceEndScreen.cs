@@ -258,7 +258,7 @@ namespace TribunalDasAlmas.Core
             btnTextRect.offsetMax = Vector2.zero;
 
             TextMeshProUGUI btnTmp = btnTextObj.AddComponent<TextMeshProUGUI>();
-            ConfigureUiText(btnTmp, "Reiniciar Sandbox", 28f, FontStyles.Bold, ColorPanelBg);
+            ConfigureUiText(btnTmp, "Reiniciar Sandbox", 32f, FontStyles.Bold, Color.white);
         }
 
         private void ConfigureUiText(
